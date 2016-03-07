@@ -14,34 +14,40 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/easyui/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-<div class="easyui-panel" title="开放实验室管理系统 - 登录" style="width:290px">
-	<div style="padding:5px 40px">
-		<form class="login-frm" id="login-frm" method="post">
-			<table>
-				<tr>
-					<td>用户名:</td>
-					<td><input class="easyui-textbox" type="text" name="username"
-						data-options="required:true"></input></td>
-				</tr>
-				<tr>
-					<td>密&nbsp;&nbsp;&nbsp;码:</td>
-					<td><input class="easyui-textbox" type="password" name="password"
-						data-options="required:true"></input></td>
-				</tr>
-				<tr>
-					<td>验证码:</td>
-					<td><input class="easyui-textbox" type="text" name="message"
-						data-options="required:true"></input></td>
-				</tr>
-			</table>
-		</form>
-		<div style="text-align: center; padding: 5px">
-			<a href="javascript:;" class="easyui-linkbutton"
-				onclick="submitForm()">&nbsp;登&nbsp;录&nbsp;</a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" onclick="clearForm()">&nbsp;重&nbsp;置&nbsp;</a>
+
+<div class = "center-div">
+<div class = "login-div">
+	<div class="easyui-panel" title="开放实验室管理系统 - 登录" style="width:290px">
+		<div style="padding:5px 40px">
+			<form class="login-frm" id="login-frm" method="post">
+				<table>
+					<tr>
+						<td>用户名:</td>
+						<td><input class="easyui-textbox" type="text" name="username"
+							data-options="required:true"></input></td>
+					</tr>
+					<tr>
+						<td>密&nbsp;&nbsp;&nbsp;码:</td>
+						<td><input class="easyui-textbox" type="password" name="password"
+							data-options="required:true"></input></td>
+					</tr>
+					<tr>
+						<td>验证码:</td>
+						<td><input class="easyui-textbox" type="text" name="message"
+							data-options="required:true"></input></td>
+					</tr>
+				</table>
+			</form>
+			<div style="text-align: center; padding: 5px">
+				<a href="javascript:;" class="easyui-linkbutton"
+					onclick="submitForm()">&nbsp;登&nbsp;录&nbsp;</a> <a href="javascript:void(0)"
+					class="easyui-linkbutton" onclick="clearForm()">&nbsp;重&nbsp;置&nbsp;</a>
+			</div>
 		</div>
 	</div>
 </div>
+</div>
+
 <script>
 	function submitForm() {
 		$('#login-frm').form('submit');

@@ -3,9 +3,17 @@
 }
 body {
     font-family:verdana,helvetica,arial,sans-serif;
-    padding:20px;
     font-size:12px;
-    margin:0;
+}
+
+.login-div {
+	margin:0 auto;
+	width:290px;
+	top:200px;
+}
+
+.center-div {
+	text-align:center;
 }
 
 .login-frm table tr td *{
