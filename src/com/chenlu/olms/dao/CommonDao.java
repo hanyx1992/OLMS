@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+
+import com.chenlu.olms.util.GlobalConstraints;
 
 /**
  * @desc:MongoDB ¹³×Ó
@@ -26,6 +29,13 @@ public abstract class CommonDao<T> {
 
 	public List<T> queryList(Query query) {
 		return this.mongoTemplate.find(query, this.getEntityClass());
+	}
+	
+	public List<T> queryAllUsedList(Query query) {
+		if (query == null) {
+			query = new Query();
+		}
+		return this.mongoTemplate.find(query.addCriteria(Criteria.where(GlobalConstraints.Data_ENUM.IS_USED_KEY).is(GlobalConstraints.Data_ENUM.IS_USED)), this.getEntityClass());
 	}
 
 	public T queryOne(Query query) {

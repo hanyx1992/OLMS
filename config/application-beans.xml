@@ -7,4 +7,12 @@
 	<!-- 启用Autowired自动装配 -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	
+	<!-- 系统参数DAO -->
+	<bean id="laboratoryDao" class="com.chenlu.olms.dao.LaboratoryDao"/>
+	
+	<!-- 用户表Svc -->
+	<bean id="laboratorySvc" class="com.chenlu.olms.service.laboratory.LaboratorySvcImpl"/>
+
+	<!-- Spring Bean 工具类  -->
+	<bean id="springBeanUtil" class="com.chenlu.olms.util.SpringBeanUtil" />
 </beans>

@@ -22,4 +22,14 @@
 	    <servlet-name>CheckcodeServlet</servlet-name>
 	    <url-pattern>/checkcode</url-pattern>
 	</servlet-mapping>
+	
+		<filter>
+		<filter-name>authFilter</filter-name>
+		<filter-class>com.chenlu.olms.filter.SysAdminAuthFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 </web-app>
