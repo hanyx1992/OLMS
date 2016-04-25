@@ -16,7 +16,7 @@ import com.chenlu.olms.util.GlobalConstraints;
  */
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration(locations = {"file:WebContent/WEB-INF/spring-servlet.xml"})
-public class UserInit{
+public class LaboratoryInit{
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -38,6 +38,8 @@ public class UserInit{
 		a.setNo("0001");
 		a.setName("第一个测试实验室");
 		a.setDesc("这个实验室才不要租用给你呢~");
+		a.setLocation("隐藏的角落");
+		a.setState((short)0);
 		a.setIsUsed(GlobalConstraints.Data_ENUM.IS_USED);
 		
 		laboratoryDao.save(a);

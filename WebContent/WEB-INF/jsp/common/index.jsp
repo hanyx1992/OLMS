@@ -7,18 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Open Laboratory Management System</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/js/easyui/themes/bootstrap/easyui.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/js/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/css/olms.css">
-<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/easyui/jquery.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+<jsp:include page="commonHeader.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" >
 	<div class="easyui-layout" style="width: auto; height: 700px;">
-		<div data-options="region:'north'">
-			Title and logo
-			<!-- logo -->
+		<div data-options="region:'north'" style="height: 57px; background: #f2f2f2; padding: 1px">
+			<img alt="Open Laboratory Management System By Chen Lu" src="<%=request.getContextPath()%>/style/img/logo.jpg">
 		</div>
 		<div data-options="region:'west'" title="菜单" style="width: 100px; padding: 5px;">
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-picture',size:'large',iconAlign:'top'">首页</a>
@@ -32,24 +26,11 @@
 		</div>
 		<div id = "main" class="easyui-tabs" data-options="region:'center',tools:'#tab-tools'" style="width: 100%">
 			<div title="Help" data-options="closable:true" style="padding: 10px">
-				<table class="easyui-datagrid" title="实验室列表" 
-					data-options="singleSelect:true,collapsible:true,url:'datagrid_data1.json',method:'get'">
-					<thead>
-						<tr>
-							<th data-options="field:'itemid',width:100,align:'center'">编号</th>
-							<th data-options="field:'productid',width:150,align:'center'">名称</th>
-							<th data-options="field:'listprice',width:250,align:'center'">位置</th>
-							<th data-options="field:'unitcost',width:400,align:'center'">描述</th>
-							<th data-options="field:'status',width:150,align:'center'">状态</th>
-						</tr>
-					</thead>
-				</table>
+				<table class="easyui-datagrid" title="实验室列表" id="lab-table"></table>
 			</div>
 		</div>
 		
 	</div>
-	<script>
-		
-	</script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/common/laboratory.js"></script>
 </body>
 </html>

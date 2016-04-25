@@ -11,8 +11,12 @@ public class Laboratory {
 	private String no;
 	/** 实验室名称 */
 	private String name;
+	/** 位置 */
+	private String location;
 	/** 描述 */
 	private String desc;
+	/** 状态 -1 未开放 */
+	private short state;
 	/** 数据状态 0 - Del ; 1 - Used */
 	private short isUsed;
 	
@@ -40,5 +44,19 @@ public class Laboratory {
 	public void setIsUsed(short isUsed) {
 		this.isUsed = isUsed;
 	}
-	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public short getState() {
+		return state;
+	}
+	public void setState(short state) {
+		this.state = state;
+	}
+	public String getStateStr() {
+		return state == (short)-1? "暂不开放":"可预约";
+	}
 }

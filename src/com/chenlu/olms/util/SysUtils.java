@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.chenlu.olms.bean.PageBean;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -15,6 +17,28 @@ import net.sf.json.JSONObject;
 public final class SysUtils {
 
 	private SysUtils() {};
+	
+	/**
+	 * 获取页面分页信息,如果没传会提供一个默认的信息.
+	 * @param request
+	 * @return
+	 */
+	public static PageBean getPageInfo(HttpServletRequest request) {
+		//分页信息
+		String page = request.getParameter("page");
+		String rowsSize = request.getParameter("rows");
+		int pageNo = 0;
+		int pageSize = 10;
+		try {
+			pageSize = Integer.parseInt(rowsSize);
+			pageNo = Integer.parseInt(page);
+		} catch (NumberFormatException e) {
+			//报错表示没传参 无视
+		}
+		
+		PageBean info = new PageBean(pageNo, pageSize);
+		return info;
+	}
 	
 	/**
 	 * @desc: 管理员是否登录
