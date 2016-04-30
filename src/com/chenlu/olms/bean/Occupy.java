@@ -6,22 +6,24 @@ import org.springframework.data.annotation.Id;
 
 /**
  * 
- * å®éªŒå®¤çš„å ç”¨æ•°æ®
+ * ÊµÑéÊÒµÄÔ¤Õ¼ĞÅÏ¢
  * @author chenlu
  */
 public class Occupy {
 	@Id
-	/** å®éªŒå®¤ç¼–å·(å¯¹åº”çš„) */
+	/** ÊµÑéÊÒidºÍÊµÑéÊÒidÏàÆ¥Åä */
 	private String no;
-	/** ç§Ÿç”¨äººç™»å½•å */
+	/** Ô¤Õ¼ÈËµÄÃû×Ö */
 	private String loginName;
-	/** ç§Ÿç”¨æ—¥æœŸ */
+	/** Ô¤Õ¼ÈËÊı */
+	private int num;
+	/** Ô¤Õ¼Ê±¼ä */
 	private Date date;
-	/** ç§Ÿç”¨ç¬¬å‡ èŠ‚è¯¾ */
+	/** µÚ¼¸½Ú¿Î */
 	private int subject;
-	/** æè¿° */
+	/** ÃèÊöĞÅÏ¢ */
 	private String desc;
-	/** æ•°æ®çŠ¶æ€ 0 - Del ; 1 - Used */
+	/** Êı¾İ×´Ì¬ 0 - Del ; 1 - Used */
 	private short isUsed;
 	
 	public String getNo() {
@@ -60,6 +62,11 @@ public class Occupy {
 	public void setIsUsed(short isUsed) {
 		this.isUsed = isUsed;
 	}
-	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	
 }

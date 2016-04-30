@@ -13,6 +13,8 @@ public class Laboratory {
 	private String name;
 	/** 位置 */
 	private String location;
+	/** 容纳人数 */
+	private int size;
 	/** 描述 */
 	private String desc;
 	/** 状态 -1 未开放 */
@@ -59,4 +61,11 @@ public class Laboratory {
 	public String getStateStr() {
 		return state == (short)-1? "暂不开放":"可预约";
 	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
 }

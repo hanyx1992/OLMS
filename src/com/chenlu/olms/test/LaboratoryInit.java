@@ -37,6 +37,7 @@ public class LaboratoryInit{
 		Laboratory a = new Laboratory();
 		a.setNo("0001");
 		a.setName("第一个测试实验室");
+		a.setSize(50);
 		a.setDesc("这个实验室才不要租用给你呢~");
 		a.setLocation("隐藏的角落");
 		a.setState((short)0);

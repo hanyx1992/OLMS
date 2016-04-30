@@ -23,6 +23,11 @@ public class LaboratoryController {
 	@Autowired
 	ILaboratorySvc laboratorySvc;
 	
+	@RequestMapping(value = "/index.do")
+	public String index() {
+		return "laboratory/laboratory";
+	}
+	
 	/**
 	 * 查询所有实验室信息
 	 * @param request
@@ -36,24 +41,4 @@ public class LaboratoryController {
 		SysUtils.returnJson(response, retInfo);
 	}
 
-//	/**
-//	 * 将dao查询到的数据转为页面显示信息
-//	 * @param findAll
-//	 * @return
-//	 */
-//	private List<Map<String, Object>> createLaboratoryBeanForView(List<Laboratory> findAll) {
-//		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-//		if (findAll !=null && findAll.size() > 0) {
-//			for (Laboratory lab : findAll) {
-//				Map<String, Object> each = new HashMap<String, Object>();
-//				each.put("labId", lab.getNo());
-//				each.put("labName", lab.getName());
-//				each.put("labDesc", lab.getDesc());
-//				each.put("labLocation", lab.getLocation());
-//				each.put("labState", lab.getStateStr());
-//				list.add(each);
-//			}
-//		}
-//		return list;
-//	}
 }
