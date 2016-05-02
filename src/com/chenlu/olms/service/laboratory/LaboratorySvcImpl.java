@@ -22,7 +22,7 @@ public class LaboratorySvcImpl implements ILaboratorySvc{
 	
 	@Override
 	public List<Laboratory> findAll() {
-		return laboratoryDao.queryAllUsedList(null);
+		return laboratoryDao.queryAllUsedListByCondition(null);
 	}
 
 	@Override
@@ -37,4 +37,8 @@ public class LaboratorySvcImpl implements ILaboratorySvc{
 		return retInfo;
 	}
 	
+	@Override
+	public Laboratory findById(String no) {
+		return laboratoryDao.queryById(no);
+	}
 }

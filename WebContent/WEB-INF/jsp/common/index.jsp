@@ -10,7 +10,7 @@
 <jsp:include page="commonHeader.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" >
-	<div class="easyui-layout" style="width: auto; height: 700px;">
+	<div class="easyui-layout" style="width: auto; height: 1000px;">
 		<div data-options="region:'north'" style="height: 57px; background: #f2f2f2; padding: 1px">
 			<img alt="Open Laboratory Management System By Chen Lu" src="<%=request.getContextPath()%>/style/img/logo.jpg">
 		</div>
@@ -21,6 +21,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-shapes',size:'large',iconAlign:'top'">公告管理</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-smartart',size:'large',iconAlign:'top'">教室管理</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">学生管理</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">教师管理</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">黑名单管理</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">个人信息</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'">退出</a>

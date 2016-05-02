@@ -9,9 +9,11 @@
 	
 	<!-- 系统参数DAO -->
 	<bean id="laboratoryDao" class="com.chenlu.olms.dao.LaboratoryDao"/>
+	<bean id="scheduleDao" class="com.chenlu.olms.dao.ScheduleDao"/>
 	
 	<!-- 用户表Svc -->
 	<bean id="laboratorySvc" class="com.chenlu.olms.service.laboratory.LaboratorySvcImpl"/>
+	<bean id="scheduleSvc" class="com.chenlu.olms.service.schedule.ScheduleSvcImpl"/>
 
 	<!-- Spring Bean 工具类  -->
 	<bean id="springBeanUtil" class="com.chenlu.olms.util.SpringBeanUtil" />

@@ -7,16 +7,24 @@ $('#lab-table').datagrid({
 	url:_rootPath + '/laboratory/find.do',
 	method: 'post',
 	loadMsg:'实验室信息加载中请稍后……',
+	toolbar:"#tb",
+	onClickRow:  function(index, rowData) {
+		parent.addTab("实验室详情", _rootPath + "/laboratory/desc.do?no="+rowData.no);
+	},
 	columns:[[
 //		{field:'content',hidden:true},
-		{field:'no', title:'编号', width:100, align:'center'},
-		{field:'name', title:'名称', width:150, align:'center'},
-		{field:'size', title:'容纳人数', width:80, align:'center'},
-		{field:'location', title:'位置', width:250, align:'center'},
-		{field:'desc', title:'描述', width:370, align:'center'},
-		{field:'stateStr', title:'状态', width:150, align:'center'}
+		{field:'no', title:'编号', width:100, sortable:"true", align:'center'},
+		{field:'name', title:'名称', width:150, sortable:"true", align:'center'},
+		{field:'size', title:'容纳人数', width:80, sortable:"true", align:'center'},
+		{field:'location', title:'位置', width:250, sortable:"true", align:'center'},
+		{field:'desc', title:'描述', width:370, sortable:"true", align:'center'},
+		{field:'stateStr', title:'状态', width:150, sortable:"true", align:'center'}
 	]]
 });
+
+
+var doSearch = function() {
+}
 
 $(function(){
 	$('#lab-table').datagrid('getPager').pagination({

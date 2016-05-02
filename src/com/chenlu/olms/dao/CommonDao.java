@@ -32,7 +32,12 @@ public abstract class CommonDao<T> {
 		return this.mongoTemplate.find(query, this.getEntityClass());
 	}
 	
-	public List<T> queryAllUsedList(Query query) {
+	public List<T> queryAllUsedList() {
+		Query query = new Query();
+		return this.mongoTemplate.find(query.addCriteria(Criteria.where(GlobalConstraints.Data_ENUM.IS_USED_KEY).is(GlobalConstraints.Data_ENUM.IS_USED)), this.getEntityClass());
+	}
+	
+	public List<T> queryAllUsedListByCondition(Query query) {
 		if (query == null) {
 			query = new Query();
 		}

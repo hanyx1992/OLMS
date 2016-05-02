@@ -18,7 +18,7 @@ public class User {
 	/** 角色 0 - Administrator ; 1 - Teacher ; 2 - Student */
 	private short role;
 	/** 权限集合 */
-	private short[] auths = {0};
+	private String[] auths = {"main"};
 	/** 创建日期 */
 	private Date createDate;
 	/** 最后登录日期 */
@@ -68,10 +68,10 @@ public class User {
 	public void setIsUsed(short isUsed) {
 		this.isUsed = isUsed;
 	}
-	public short[] getAuths() {
+	public String[] getAuths() {
 		return auths;
 	}
-	public void setAuths(short[] auths) {
+	public void setAuths(String[] auths) {
 		this.auths = auths;
 	}
 	
