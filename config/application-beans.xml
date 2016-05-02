@@ -7,13 +7,17 @@
 	<!-- 启用Autowired自动装配 -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	
-	<!-- 系统参数DAO -->
+	<!-- DAO -->
 	<bean id="laboratoryDao" class="com.chenlu.olms.dao.LaboratoryDao"/>
 	<bean id="scheduleDao" class="com.chenlu.olms.dao.ScheduleDao"/>
+	<bean id="occupyDao" class="com.chenlu.olms.dao.OccupyDao"/>
+	<bean id="changeClzDao" class="com.chenlu.olms.dao.ChangeClzDao"/>
 	
-	<!-- 用户表Svc -->
+	<!-- Svc -->
 	<bean id="laboratorySvc" class="com.chenlu.olms.service.laboratory.LaboratorySvcImpl"/>
 	<bean id="scheduleSvc" class="com.chenlu.olms.service.schedule.ScheduleSvcImpl"/>
+	<bean id="occupySvc" class="com.chenlu.olms.service.occupy.OccupySvcImpl"/>
+	<bean id="changeClzSvc" class="com.chenlu.olms.service.changeclz.ChangeClzSvcImpl"/>
 
 	<!-- Spring Bean 工具类  -->
 	<bean id="springBeanUtil" class="com.chenlu.olms.util.SpringBeanUtil" />

@@ -49,11 +49,11 @@
 		    <form id="scheduleForm" method="post">
 		    	<table style="text-align:center;table-layout:fixed;width:80%">
 		    		<tr>
-		    			<td colspan="2" style="text-align:left"><a href="javascript:;" class="easyui-linkbutton">&nbsp;上一周&nbsp;</a></td>
+		    			<td colspan="2" style="text-align:left"><a href="javascript:;" onClick="lastWeek();" class="easyui-linkbutton">&nbsp;上一周&nbsp;</a></td>
 		    			<td></td>
-		    			<td colspan="4" id="date-label">0000.00.00 ~ 0000.00.00</td>
+		    			<td colspan="4" id="date-label">${startDate} ~ ${endDate}</td>
 		    			<td></td>
-		    			<td colspan="2" style="text-align:right"><a href="javascript:;" class="easyui-linkbutton">&nbsp;下一周&nbsp;</a></td>
+		    			<td colspan="2" style="text-align:right"><a href="javascript:;" onClick="nextWeek();" class="easyui-linkbutton">&nbsp;下一周&nbsp;</a></td>
 		    		</tr>
 		    	</table>
 				<table class="schedule-table">

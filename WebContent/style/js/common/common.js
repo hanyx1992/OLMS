@@ -1,4 +1,4 @@
-function addTab(title, url){
+var addTab = function(title, url) {
 	if ($('#mainTabs').tabs('exists', title)){
 		$('#mainTabs').tabs('select', title);
 	} else {
@@ -9,4 +9,14 @@ function addTab(title, url){
 			closable:true
 		});
 	}
+}
+
+var hyx = function(url,data,func) {
+	return 	$.post(url,data,function(data){
+		if (data.success) {
+			func(data);
+		} else {
+			$.messager.alert('发生错误啦!', data.errMsg, 'error');
+		}
+	},"json");
 }

@@ -3,8 +3,10 @@ package com.chenlu.olms.util;
 /**
  * 全局常量
  */
-public class GlobalConstraints {
-
+public final class GlobalConstraints {
+	
+	private GlobalConstraints() {};
+ 
 	/**
 	 * 一些常用路径的配置
 	 */
