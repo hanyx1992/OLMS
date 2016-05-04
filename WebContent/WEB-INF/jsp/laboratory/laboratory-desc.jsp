@@ -69,66 +69,66 @@
 					</tr>
 					<tr>
 						<td>第一大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					<tr>
 						<td>第二大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					<tr>
 						<td>第三大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					<tr>
 						<td>第四大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					<c:if test="${num>4}">
 					<tr>
 						<td>第五大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					</c:if>
 					<c:if test="${num>5}">
 					<tr>
 						<td>第六大节</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
+						<td class="a-td" title="可预约" ></td>
 					</tr>
 					</c:if>
 				</table>

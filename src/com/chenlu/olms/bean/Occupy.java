@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.GlobalConstraints;
+
 /**
  * 
  * 实验室的预占信息
@@ -24,7 +26,7 @@ public class Occupy {
 	/** 描述信息 */
 	private String desc;
 	/** 数据状态 0 - Del ; 1 - Used */
-	private short isUsed;
+	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 	
 	public String getNo() {
 		return no;

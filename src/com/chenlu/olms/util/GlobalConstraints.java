@@ -11,8 +11,9 @@ public final class GlobalConstraints {
 	 * 一些常用路径的配置
 	 */
 	public static interface REQUEST_URL {
-		public static final String TOLOGIN = "";
-		public static final String LOGIN = "";
+		public static final String TOLOGIN = "/login.do";
+		public static final String LOGIN = "/verify.do";
+		public static final String AUTH = "/noauth.do";
 	}
 
 	/**
@@ -29,6 +30,10 @@ public final class GlobalConstraints {
 		public static final String IS_USED_KEY = "isUsed";
 		public static final short IS_USED = 1;
 		public static final short IS_NOT_USED = 0;
+		
+		public static final short USER_ROLE_ADMINISTRATOR = 0;
+		public static final short USER_ROLE_TEACHER = 1;
+		public static final short USER_ROLE_STUDENT = 2;
 	}
 	
 	/**

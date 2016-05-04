@@ -11,12 +11,13 @@ var addTab = function(title, url) {
 	}
 }
 
-var hyx = function(url,data,func) {
+var hyx = function(url,data,func, errfunc) {
 	return 	$.post(url,data,function(data){
 		if (data.success) {
 			func(data);
 		} else {
 			$.messager.alert('发生错误啦!', data.errMsg, 'error');
+			errfunc(data);
 		}
 	},"json");
 }

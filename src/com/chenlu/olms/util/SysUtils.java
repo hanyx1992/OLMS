@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chenlu.olms.bean.PageBean;
+import com.chenlu.olms.bean.User;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -17,7 +18,7 @@ import net.sf.json.JSONObject;
 public final class SysUtils {
 
 	private SysUtils() {};
-	
+
 	/**
 	 * 获取页面分页信息,如果没传会提供一个默认的信息.
 	 * @param request
@@ -51,6 +52,24 @@ public final class SysUtils {
 			return false;
 		}
 		return request.getSession().getAttribute(GlobalConstraints.SESSION_KEY.USER)!=null;
+	}
+	
+	/**
+	 * 设置Session中登录的用户实体
+	 * @param request
+	 * @param user
+	 */
+	public static void setLoginedUser(HttpServletRequest request, User user) {
+		request.getSession(true).setAttribute(GlobalConstraints.SESSION_KEY.USER, user);
+	}
+	
+	/**
+	 * 从Session中获取登录的用户实体
+	 * @param request
+	 * @return
+	 */
+	public static User getLoginedUser(HttpServletRequest request) {
+		return (User) request.getSession(true).getAttribute(GlobalConstraints.SESSION_KEY.USER);
 	}
 	
 	/**

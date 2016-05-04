@@ -24,6 +24,17 @@ body {
 .heigth-div-15 {
 	margin:15px
 }
+.height-div-200 {
+	margin:200px
+}
+
+.login-back-image { 
+	padding: 0; 
+	margin: 0; 
+	background: #f8f7e5 url(../img/login-back.jpg) no-repeat center top; 
+	width: 100%; 
+	display: table; 
+} 
 
 .schedule-table {
 	border: solid 1px #d2d2d2;
@@ -35,4 +46,8 @@ body {
 
 .schedule-table tr td {
 	border: solid 1px #d2d2d2;
+}
+
+.schedule-table tr .a-td:hover{
+	cursor:pointer;
 }

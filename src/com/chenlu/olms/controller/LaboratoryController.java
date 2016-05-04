@@ -29,9 +29,9 @@ import com.chenlu.olms.util.SysUtils;
 public class LaboratoryController {
 
 	@Autowired
-	ILaboratorySvc laboratorySvc;
+	private ILaboratorySvc laboratorySvc;
 	@Autowired
-	IScheduleSvc scheduleSvc;
+	private IScheduleSvc scheduleSvc;
 	
 	/**
 	 * 实验室列表页面跳转
@@ -132,5 +132,12 @@ public class LaboratoryController {
 		PageRetInfo<Laboratory> retInfo = laboratorySvc.findByCondition(page, null);
 		SysUtils.returnJson(response, retInfo);
 	}
-
+	
+	@RequestMapping(value = "/occupy.do")
+	public void occupy(HttpServletRequest request, HttpServletResponse response) {
+		String day = request.getParameter("day");
+		String num = request.getParameter("num");
+		
+		
+	}
 }

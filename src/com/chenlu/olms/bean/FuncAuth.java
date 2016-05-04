@@ -2,6 +2,8 @@ package com.chenlu.olms.bean;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.GlobalConstraints;
+
 /**
  * 功能权限
  */
@@ -13,7 +15,7 @@ public class FuncAuth {
 	/** 页面一级路径 如 "/page" */
 	private String pageUrl;
 	/** 数据状态 0 - Del ; 1 - Used */
-	private short isUsed;
+	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 	
 	public short getFuncId() {
 		return funcId;

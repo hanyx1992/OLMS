@@ -2,6 +2,8 @@ package com.chenlu.olms.bean;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.GlobalConstraints;
+
 /**
  * 实验室
  */
@@ -20,7 +22,7 @@ public class Laboratory {
 	/** 状态 -1 未开放 */
 	private short state;
 	/** 数据状态 0 - Del ; 1 - Used */
-	private short isUsed;
+	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 	
 	public String getNo() {
 		return no;

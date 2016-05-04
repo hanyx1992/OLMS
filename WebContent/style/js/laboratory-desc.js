@@ -22,8 +22,18 @@ var refreshOccupy = function(data) {
 	$("#date-label").html(data.startDate +" ~ " + data.endDate);
 }
 
-
 $(function(){
+	
+	//可预约
+	$(document).on('click','.schedule-table tr .a-td[title="可预约"]',function(){
+		var day = $(this).index() - 1;
+		var num = $(this).parent('tr').index() - 1;
+		hyx(_rootPath + "/laboratory/occupy.do", {day : day, num : num, startDate:getStartDate()},
+				function(data){
+			
+		});
+	});
+	
 	//加载课程表
 	var loadSche = hyx(_rootPath+"/laboratory/schedule.do",{no:no},function(data){
 		data = data.sche;

@@ -12,12 +12,14 @@
 	<bean id="scheduleDao" class="com.chenlu.olms.dao.ScheduleDao"/>
 	<bean id="occupyDao" class="com.chenlu.olms.dao.OccupyDao"/>
 	<bean id="changeClzDao" class="com.chenlu.olms.dao.ChangeClzDao"/>
+	<bean id="userDao" class="com.chenlu.olms.dao.UserDao"/>
 	
 	<!-- Svc -->
 	<bean id="laboratorySvc" class="com.chenlu.olms.service.laboratory.LaboratorySvcImpl"/>
 	<bean id="scheduleSvc" class="com.chenlu.olms.service.schedule.ScheduleSvcImpl"/>
 	<bean id="occupySvc" class="com.chenlu.olms.service.occupy.OccupySvcImpl"/>
 	<bean id="changeClzSvc" class="com.chenlu.olms.service.changeclz.ChangeClzSvcImpl"/>
+	<bean id="userSvc" class="com.chenlu.olms.service.user.UserSvcImpl"/>
 
 	<!-- Spring Bean 工具类  -->
 	<bean id="springBeanUtil" class="com.chenlu.olms.util.SpringBeanUtil" />

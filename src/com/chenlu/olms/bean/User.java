@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.GlobalConstraints;
+
 /**
  * 用户表
  */
@@ -18,13 +20,13 @@ public class User {
 	/** 角色 0 - Administrator ; 1 - Teacher ; 2 - Student */
 	private short role;
 	/** 权限集合 */
-	private String[] auths = {"main"};
+	private String[] auths = {"main","laboratory"};
 	/** 创建日期 */
 	private Date createDate;
 	/** 最后登录日期 */
 	private Date lastLoginDate;
 	/** 数据状态 0 - Del ; 1 - Used */
-	private short isUsed;
+	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 	
 	public String getLoginName() {
 		return loginName;
