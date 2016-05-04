@@ -10,6 +10,7 @@
 <jsp:include page="../common/commonHeader.jsp"></jsp:include>
 <script type="text/javascript">
 	var no = '${lab.no}';
+	var size = '${lab.size}';
 </script>
 </head>
 <body class="easyui-layout" >
@@ -136,6 +137,32 @@
 			</div>
 		</div>
 		
+		<div id="occupy-window" class="easyui-window" title="预占实验室" 
+			data-options="closed:true, iconCls:'icon-save', minimizable:false, maximizable:false,
+			resizable:false" 
+			style="width:280px;height:230px;padding:10px;">
+			<table>
+				<tr>
+					<td>预占时间:</td>
+					<td id = "date-span">0000.00.00 周一 第三大节</td>
+				</tr>
+				<tr>
+					<td>预占人数:</td>
+					<td><input id = "occupy-num-ipt" class="easyui-numberspinner" value="1" data-options="min:1,max:10,required:true,increment:1" style="width:120px;"></input></td>
+				</tr>
+				<tr>
+					<td>申请描述:</td>
+					<td><input id = "occupy-desc-ipt"  class="easyui-textbox" data-options="multiline:true" value="" style="width:150px;height:50px"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<a href="javascript:;" class="easyui-linkbutton" onClick="submitOccupy();">提交</a>
+						<a href="javascript:;" class="easyui-linkbutton" onClick="cancelOccupy();">取消</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/laboratory-desc.js"></script>
 </body>

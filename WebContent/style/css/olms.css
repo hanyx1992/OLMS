@@ -28,6 +28,10 @@ body {
 	margin:200px
 }
 
+.fn-hide {
+	display:none;
+}
+
 .login-back-image { 
 	padding: 0; 
 	margin: 0; 

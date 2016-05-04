@@ -10,4 +10,6 @@ public interface IOccupySvc {
 
 
 	Occupy findById(String no);
+	
+	void save(Occupy occupy);
 }

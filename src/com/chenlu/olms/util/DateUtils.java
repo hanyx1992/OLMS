@@ -128,8 +128,20 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		return getILikeFormat().format(date);
 	}
 	
+	
 	public static SimpleDateFormat getILikeFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd");
 	}
 	
+	/**
+	 * 求字符串yyyy-MM-dd的日期之后的第几天
+	 * @param date
+	 * @param dayNum
+	 * @return
+	 */
+	public static Date getDateAfterDayNumByDateSting(String date, int dayNum) {
+		Calendar cal = getCalByILikeString(date);
+		cal.add(Calendar.DAY_OF_YEAR, dayNum);
+		return cal.getTime();
+	}
 }

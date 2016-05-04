@@ -6,16 +6,21 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.chenlu.olms.bean.Laboratory;
+import com.chenlu.olms.bean.Occupy;
 import com.chenlu.olms.bean.PageBean;
 import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.bean.Schedule;
+import com.chenlu.olms.bean.User;
 import com.chenlu.olms.service.laboratory.ILaboratorySvc;
+import com.chenlu.olms.service.occupy.IOccupySvc;
 import com.chenlu.olms.service.schedule.IScheduleSvc;
 import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
@@ -28,10 +33,14 @@ import com.chenlu.olms.util.SysUtils;
 @RequestMapping("/laboratory")
 public class LaboratoryController {
 
+	private static Log log = LogFactory.getLog(LaboratoryController.class);
+	
 	@Autowired
 	private ILaboratorySvc laboratorySvc;
 	@Autowired
 	private IScheduleSvc scheduleSvc;
+	@Autowired
+	private IOccupySvc occupySvc;
 	
 	/**
 	 * 实验室列表页面跳转
@@ -83,6 +92,7 @@ public class LaboratoryController {
 	@RequestMapping(value = "/getOccupyInfo.do")
 	public void getOccupyInfo(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
+		log.info(no);
 		String startDate = request.getParameter("startDate");
 		String isLast = request.getParameter("isLast");
 		Map<String, Object> retMap = new HashMap<String, Object>();
@@ -114,6 +124,8 @@ public class LaboratoryController {
 	public void getChangeClzInfo(HttpServletRequest request, HttpServletResponse response) {
 		String no = request.getParameter("no");
 		String startDate = request.getParameter("startDate");
+		log.info(no);
+		log.info(startDate);
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("success", true);
 		SysUtils.returnJson(response, retMap);
@@ -135,9 +147,35 @@ public class LaboratoryController {
 	
 	@RequestMapping(value = "/occupy.do")
 	public void occupy(HttpServletRequest request, HttpServletResponse response) {
+		String no = request.getParameter("no");
 		String day = request.getParameter("day");
 		String num = request.getParameter("num");
+		String startDate = request.getParameter("startDate");
+		String onum = request.getParameter("onum");
+		String desc = request.getParameter("desc");
 		
+		Map<String, Object> retMap = new HashMap<String, Object>();
+
+		try {
+			User user = SysUtils.getLoginedUser(request);
+			
+			Occupy occupy = new Occupy();
+			occupy.setLoginName(user.getLoginName());
+			occupy.setNo(no);
+			occupy.setNum(Integer.parseInt(onum));
+			occupy.setDate(DateUtils.getDateAfterDayNumByDateSting(startDate, Integer.parseInt(day)));
+			occupy.setSubject(Integer.parseInt(num));
+			occupy.setDesc(desc);
+			
+			occupySvc.save(occupy);
+			
+			retMap.put("success", true);
+			
+		} catch (Exception e) {
+			retMap.put("success", true);
+			retMap.put("errMsg", "信息有误,请重试!");
+		}
 		
+		SysUtils.returnJson(response, retMap);
 	}
 }

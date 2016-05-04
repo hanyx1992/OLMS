@@ -1,9 +1,44 @@
 $.messager.progress({interval:77});
 
+var _day=0;
+var _num=0;
+
 var getStartDate = function() {
 	var text = $("#date-label").html();
 	var startDate = text.substring(0,text.indexOf("~")-1);
 	return startDate
+};
+
+var getEndDate = function() {
+	var text = $("#date-label").html();
+	var endDate = text.substring(text.indexOf("~") + 2);
+	return endDate;
+};
+
+var getDateStr = function(day) {
+	var s = getStartDate();
+	var e = getEndDate();
+	var sDay = parseInt(s.substring(s.lastIndexOf("-")+1));
+	var eDay = parseInt(e.substring(e.lastIndexOf("-")+1));
+	var cur = 0;
+	var str = e.substring(0,e.lastIndexOf("-")+1);
+	if (eDay < sDay) {
+		cur = eDay - 6 + day;
+		if (cur < 10) {
+			str = e + "0" +cur;
+		} else {
+			str = e + cur;
+		}
+	}
+	if (cur < 1) {
+		cur = sDay + day;
+		if (cur < 10) {
+			str = s.substring(0,s.lastIndexOf("-")+1) + "0" +cur;
+		} else {
+			str = s.substring(0,s.lastIndexOf("-")+1) + cur;
+		}
+	}
+	return str;
 }
 
 var lastWeek = function() {
@@ -20,18 +55,32 @@ var nextWeek = function() {
 
 var refreshOccupy = function(data) {
 	$("#date-label").html(data.startDate +" ~ " + data.endDate);
+};
+
+var cancelOccupy = function() {
+	$('#occupy-window').window('close');
+};
+
+var submitOccupy = function() {
+	$('#occupy-window').window('close');
+	hyx(_rootPath + "/laboratory/occupy.do", {no:no, day : _day, num : _num, onum: $("#occupy-num-ipt").val(),startDate:getStartDate(), desc: $("#occupy-desc-ipt").val()},
+			function(data){
+				$.messager.alert('成功', '预占申请提交成功,请耐心等待老师或者管理员审核!', 'info');
+	});
 }
 
 $(function(){
 	
 	//可预约
 	$(document).on('click','.schedule-table tr .a-td[title="可预约"]',function(){
-		var day = $(this).index() - 1;
-		var num = $(this).parent('tr').index() - 1;
-		hyx(_rootPath + "/laboratory/occupy.do", {day : day, num : num, startDate:getStartDate()},
-				function(data){
-			
-		});
+		_day = $(this).index() - 1;
+		_num = $(this).parent('tr').index() - 1;
+		$('#occupy-num-ipt').numberspinner({max: parseInt(size)});
+		
+		$("#date-span").html(getDateStr(_day) + " " + $(".schedule-table tr:eq(0) td").eq(_day+1).html() + " " + $(".schedule-table tr").eq(_num+1).children("td:eq(0)").html());
+		
+		$('#occupy-window').window('open');
+
 	});
 	
 	//加载课程表

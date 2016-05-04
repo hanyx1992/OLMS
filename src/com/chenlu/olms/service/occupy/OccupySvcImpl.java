@@ -25,4 +25,9 @@ public class OccupySvcImpl implements IOccupySvc{
 		log.debug(no);
 		return occupyDao.queryById(no);
 	}
+
+	@Override
+	public void save(Occupy occupy) {
+		occupyDao.save(occupy);
+	}
 }
