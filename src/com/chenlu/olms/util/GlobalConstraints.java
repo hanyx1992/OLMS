@@ -14,6 +14,7 @@ public final class GlobalConstraints {
 		public static final String TOLOGIN = "/login.do";
 		public static final String LOGIN = "/verify.do";
 		public static final String AUTH = "/noauth.do";
+		public static final String LOGOUT = "/logout.do";
 	}
 
 	/**

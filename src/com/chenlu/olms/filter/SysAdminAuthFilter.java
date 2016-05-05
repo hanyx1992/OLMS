@@ -46,7 +46,8 @@ public class SysAdminAuthFilter extends OncePerRequestFilter{
 	private boolean isToLogin(HttpServletRequest request) {
 		return (request.getContextPath() + GlobalConstraints.REQUEST_URL.TOLOGIN).equals(request.getRequestURI())
 				|| (request.getContextPath() + GlobalConstraints.REQUEST_URL.LOGIN).equals(request.getRequestURI())
-				|| (request.getContextPath() + GlobalConstraints.REQUEST_URL.AUTH).equals(request.getRequestURI());
+				|| (request.getContextPath() + GlobalConstraints.REQUEST_URL.AUTH).equals(request.getRequestURI())
+				|| (request.getContextPath() + GlobalConstraints.REQUEST_URL.LOGOUT).equals(request.getRequestURI());
 	}
 	
 	/**

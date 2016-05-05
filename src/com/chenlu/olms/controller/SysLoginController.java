@@ -31,6 +31,12 @@ public class SysLoginController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:login.do";
+	}
+	
 	@RequestMapping(value = "/verify.do")
 	public void verify(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> retMap = new HashMap<String, Object>();
