@@ -34,6 +34,10 @@ public final class GlobalConstraints {
 		public static final short USER_ROLE_ADMINISTRATOR = 0;
 		public static final short USER_ROLE_TEACHER = 1;
 		public static final short USER_ROLE_STUDENT = 2;
+		
+		public static final short OCCUPY_REVIEW_WAIT = 0;
+		public static final short OCCUPY_REVIEW_SUCCESSS = 1;
+		public static final short OCCUPT_REVIEW_FAILED = -1;
 	}
 	
 	/**

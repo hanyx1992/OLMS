@@ -13,4 +13,9 @@ public class ExplorerController {
 	public String homepage(HttpServletRequest request) {
 		return "/common/index";
 	}
+	
+	@RequestMapping(value = "/index.do")
+	public String homenotice(HttpServletRequest request) {
+		return "/common/homenotice";
+	}
 }
