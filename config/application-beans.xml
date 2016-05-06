@@ -13,6 +13,7 @@
 	<bean id="occupyDao" class="com.chenlu.olms.dao.OccupyDao"/>
 	<bean id="changeClzDao" class="com.chenlu.olms.dao.ChangeClzDao"/>
 	<bean id="userDao" class="com.chenlu.olms.dao.UserDao"/>
+	<bean id="noticeDao" class="com.chenlu.olms.dao.NoticeDao"/>
 	
 	<!-- Svc -->
 	<bean id="laboratorySvc" class="com.chenlu.olms.service.laboratory.LaboratorySvcImpl"/>
@@ -20,6 +21,7 @@
 	<bean id="occupySvc" class="com.chenlu.olms.service.occupy.OccupySvcImpl"/>
 	<bean id="changeClzSvc" class="com.chenlu.olms.service.changeclz.ChangeClzSvcImpl"/>
 	<bean id="userSvc" class="com.chenlu.olms.service.user.UserSvcImpl"/>
+	<bean id="noticeSvc" class="com.chenlu.olms.service.notice.NoticeSvcImpl"/>
 
 	<!-- Spring Bean 工具类  -->
 	<bean id="springBeanUtil" class="com.chenlu.olms.util.SpringBeanUtil" />

@@ -44,8 +44,20 @@ public class UserInit{
 		a.setRealName("韩元旭");
 		a.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT);
 		a.setCreateDate(new Date());
-		
+
 		userDao.save(a);
+		
+		//初始化数据
+		User b = new User();
+		
+		b.setLoginName("admin");
+		b.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
+		b.setRealName("管理员");
+		b.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_ADMINISTRATOR);
+		b.setCreateDate(new Date());
+		b.setAuths(GlobalConstraints.Data_ENUM.USER_AUTHS_ALL);
+			
+		userDao.save(b);
 	}
 	
 }
