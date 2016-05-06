@@ -1,5 +1,8 @@
 package com.chenlu.olms.controller;
 
+import java.util.Date;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,4 +40,39 @@ public class NoticeAdminController {
 		PageRetInfo<Notice> retInfo = noticeSvc.findByCondition(page, null);
 		SysUtils.returnJson(response, retInfo);
 	}
+	
+	/**
+	 * Ìí¼Ó¹«¸æ
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "/addNotice.do")
+	public void addNotice(HttpServletRequest request, HttpServletResponse response) {
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String exp = request.getParameter("exp");
+
+		Map<String, Object> retMap;
+		try {
+			noticeSvc.addNotice(title, content, new Date(Long.parseLong(exp)));
+			retMap = SysUtils.getDefaultSuccessMap();
+		} catch (Exception e) {
+			retMap = SysUtils.getDefaultErrorMap();
+		}
+		SysUtils.returnJson(response, retMap);
+	}
+	
+	@RequestMapping(value = "/delNotice.do")
+	public void delNotice(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		Map<String, Object> retMap;
+		try {
+			noticeSvc.deleteById(id);
+			retMap = SysUtils.getDefaultSuccessMap();
+		} catch (Exception e) {
+			retMap = SysUtils.getDefaultErrorMap();
+		}
+		SysUtils.returnJson(response, retMap);
+	}
+	
 }

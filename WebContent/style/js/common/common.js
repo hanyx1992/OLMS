@@ -21,3 +21,18 @@ var hyx = function(url,data,func, errfunc) {
 		}
 	},"json");
 }
+
+var dateSorter = function(a, b) {
+	a = a.split('-');
+	b = b.split('-');
+	if (parseInt(a[0]) == parseInt(b[0])) {
+		if (parseInt(a[1]) == parseInt(b[1])) {
+			return (parseInt(a[1]) > parseInt(b[1]) ? 1 : -1);
+		} else {
+			return (parseInt(a[2]) > parseInt(b[2]) ? 1 : -1);
+		}
+	} else {
+		return (parseInt(a[0]) > parseInt(b[0]) ? 1 : -1);
+	}
+
+}

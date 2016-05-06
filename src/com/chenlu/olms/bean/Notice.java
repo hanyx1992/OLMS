@@ -63,4 +63,7 @@ public class Notice {
 	public String getExpDateStr() {
 		return DateUtils.formatDateToILikeymdStr(expDate);
 	}
+	public String getDeletebtn() {
+		return "<a href='javascript:;' class='dlt-btn easyui-linkbutton'>É¾³ý</a>";
+	}
 }

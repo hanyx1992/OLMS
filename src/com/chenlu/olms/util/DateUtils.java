@@ -81,19 +81,23 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		return cal;
 	}
 	
-	/**
-	 * 获取Calendar
-	 * @return
-	 */
-	public static Calendar getCalByILikeString(String str) {
+	public static Date parseDateWithILikeString(String str) {
 		Date now;
 		try {
 			now = new SimpleDateFormat("yyyy-MM-dd").parse(str);
 		} catch (ParseException e) {
 			now = new Date();
 		}
+		return now;
+	}
+	
+	/**
+	 * 获取Calendar
+	 * @return
+	 */
+	public static Calendar getCalByILikeString(String str) {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(now);
+		cal.setTime(parseDateWithILikeString(str));
 		return cal;
 	}
 	
@@ -143,5 +147,36 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		Calendar cal = getCalByILikeString(date);
 		cal.add(Calendar.DAY_OF_YEAR, dayNum);
 		return cal.getTime();
+	}
+	
+	/**
+	 * 比较时间是否在两个时间之间,允许起始和结束有一个为null;
+	 * @param date
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static boolean isBetweenTwoDate(Date date, Date start, Date end) {
+		if (date == null || (start==null && end==null)) {
+			return false;
+		}
+		if (start == null && end != null && date.getTime() <= end.getTime()) {
+			return true;
+		}
+		if (end == null && start != null && date.getTime() >= start.getTime()) {
+			return true;
+		}
+		return date.getTime() <= end.getTime() && date.getTime() >= start.getTime();
+	}
+	
+	/**
+	 * 比较现在时间是否在两个时间之间,允许起始和结束有一个为null;
+	 * @param date
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static boolean isNowBetweenTwoDate(Date start, Date end) {
+		return isBetweenTwoDate(new Date(), start, end);
 	}
 }

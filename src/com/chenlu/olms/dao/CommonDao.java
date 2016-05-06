@@ -79,6 +79,17 @@ public abstract class CommonDao<T> {
 	public void delete(T t) {
 		this.mongoTemplate.remove(t);
 	}
+	
+	public void logicDeleteById(Object id) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where(GlobalConstraints.Data_ENUM.IS_USED_KEY).is(GlobalConstraints.Data_ENUM.IS_USED));
+		query.addCriteria(Criteria.where("id").is(id));
+		
+		Update update = new Update();
+		update.set(GlobalConstraints.Data_ENUM.IS_USED_KEY, GlobalConstraints.Data_ENUM.IS_NOT_USED);
+		
+		this.mongoTemplate.updateMulti(query, update, this.getEntityClass());
+	}
 
 	public void updateFirst(Query query, Update update) {
 		this.mongoTemplate.updateFirst(query, update, this.getEntityClass());

@@ -2,6 +2,8 @@ package com.chenlu.olms.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -118,5 +120,17 @@ public final class SysUtils {
 				out.close();
 			}
 		}
+	}
+	
+	public static Map<String, Object> getDefaultErrorMap() {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("success", false);
+		retMap.put("errMsg", "对不起,发生错误了,请重试!");
+		return retMap;
+	}
+	public static Map<String, Object> getDefaultSuccessMap() {
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("success", true);
+		return retMap;
 	}
 }

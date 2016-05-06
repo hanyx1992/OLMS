@@ -39,7 +39,7 @@ public class NoticeInit{
 		a.setContent("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		a.setIsUsed(GlobalConstraints.Data_ENUM.IS_USED);
 		a.setCreateDate(new Date());
-		a.setExpDate(new Date(System.currentTimeMillis()+60*60*24*7));
+		a.setExpDate(new Date(System.currentTimeMillis()+1000*60*60*24*7));
 		noticeDao.save(a);
 	}
 	

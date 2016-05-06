@@ -11,8 +11,15 @@
 </head>
 <body class="easyui-layout" >
 
-	<div title="首页" data-options="closable:true" style="padding: 10px">
-		<p>显示公告</p>
+	<div title="首页" data-options="closable:true" style="text-align:center;padding: 10px">
+		<c:forEach items="${allNotice}" var="notice" varStatus="i">
+			<c:if test="${i.index>0}">
+				<div class="heigth-div-15"></div>
+			</c:if>
+			<div class="easyui-panel" title="${notice.title}" style="width:100%">
+				<div style="text-align:center;padding:15px;word-break:break-all; width:85%; overflow:auto;">${notice.content}</div>
+			</div>
+		</c:forEach>
 	</div>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/common/homenotice.js"></script>
 </body>

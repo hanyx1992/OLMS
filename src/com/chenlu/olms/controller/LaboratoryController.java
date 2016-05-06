@@ -76,11 +76,10 @@ public class LaboratoryController {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		try {
 			Schedule sche = scheduleSvc.findById(no);
-			retMap.put("success", true);
+			retMap = SysUtils.getDefaultSuccessMap();
 			retMap.put("sche",  sche);
 		} catch (Exception e) {
-			retMap.put("success", false);
-			retMap.put("errMsg", "对不起,发生异常,请稍后重试!");
+			retMap = SysUtils.getDefaultErrorMap();
 		}
 		SysUtils.returnJson(response, retMap);
 	}
@@ -95,7 +94,7 @@ public class LaboratoryController {
 		log.info(no);
 		String startDate = request.getParameter("startDate");
 		String isLast = request.getParameter("isLast");
-		Map<String, Object> retMap = new HashMap<String, Object>();
+		Map<String, Object> retMap = SysUtils.getDefaultSuccessMap();
 		try {
 			if (StringUtils.isEmpty(startDate)) {
 				retMap.put("startDate", DateUtils.getFirstDayOfThisWeek());
@@ -107,10 +106,8 @@ public class LaboratoryController {
 				retMap.put("startDate", DateUtils.getFirstDayOfTheWeek(startDate));
 				retMap.put("endDate",  DateUtils.getLastDayOfTheWeek(startDate));
 			}
-			retMap.put("success", true);
 		} catch (Exception e) {
-			retMap.put("success", false);
-			retMap.put("errMsg", "对不起,发生异常,请稍后重试!");
+			retMap = SysUtils.getDefaultErrorMap();
 		}
 		
 		SysUtils.returnJson(response, retMap);
@@ -126,9 +123,7 @@ public class LaboratoryController {
 		String startDate = request.getParameter("startDate");
 		log.info(no);
 		log.info(startDate);
-		Map<String, Object> retMap = new HashMap<String, Object>();
-		retMap.put("success", true);
-		SysUtils.returnJson(response, retMap);
+		SysUtils.returnJson(response, SysUtils.getDefaultSuccessMap());
 	}
 	
 	
@@ -169,11 +164,9 @@ public class LaboratoryController {
 			
 			occupySvc.save(occupy);
 			
-			retMap.put("success", true);
-			
+			retMap = SysUtils.getDefaultSuccessMap();
 		} catch (Exception e) {
-			retMap.put("success", true);
-			retMap.put("errMsg", "信息有误,请重试!");
+			retMap = SysUtils.getDefaultErrorMap();
 		}
 		
 		SysUtils.returnJson(response, retMap);
