@@ -24,8 +24,8 @@
 		<c:if test="${m=='tea-mag'}">
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "tea-mag" title = "教师管理">教师管理</a>
 		</c:if>
-		<c:if test="${m=='blk-mag'}">
-			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "blk-mag" title = "黑名单管理">黑名单管理</a>
+		<c:if test="${m=='auth-mag'}">
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "auth-mag" title = "权限和黑名单">权限和黑名单</a>
 		</c:if>
 	</c:forEach>
 	<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val =  "info" title = "我的">我的</a>

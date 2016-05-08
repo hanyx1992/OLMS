@@ -49,7 +49,7 @@ public class UserSvcImpl implements IUserSvc{
 	public PageRetInfo<User> findByCondition(PageBean page, User condition) {
 		Query query = new Query();
 		
-		if (condition.getRole() != null) {
+		if (condition != null && condition.getRole() != null) {
 			query.addCriteria(Criteria.where("role").is(condition.getRole()));
 		}
 		

@@ -103,8 +103,6 @@ public abstract class CommonDao<T> {
 		
 		T t = this.mongoTemplate.findById(id, this.getEntityClass());
 		
-		this.mongoTemplate.remove(new Query(Criteria.where(key).is(id)), this.getEntityClass());
-		
 		try {
 			Field idKey = t.getClass().getDeclaredField(key);
 			idKey.setAccessible(true);
@@ -123,6 +121,7 @@ public abstract class CommonDao<T> {
 		}
 		
 		this.mongoTemplate.save(t);
+		this.mongoTemplate.remove(new Query(Criteria.where(key).is(id)), this.getEntityClass());
 	}
 
 	public void updateFirst(Query query, Update update) {

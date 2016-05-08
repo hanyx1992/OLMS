@@ -107,4 +107,31 @@ public class User {
 	public String getRoleStr() {
 		return GlobalConstraints.Data_ENUM.USER_ROLE_STRING[this.role];
 	}
+	public String getAuthStr() {
+		StringBuffer auth = new StringBuffer();
+		String fs = ", ";
+		for (String str : this.auths) {
+			for (int i = 0; i < GlobalConstraints.Data_ENUM.USER_AUTH_KEY.length; i++) {
+				String a = GlobalConstraints.Data_ENUM.USER_AUTH_KEY[i];
+				if (str.equals(a)) {
+					auth.append(GlobalConstraints.Data_ENUM.USER_AUTH_STR[i]).append(fs);
+					break;
+				}
+			}
+		}
+		int i;
+		if ((i = auth.lastIndexOf(fs)) > 0) {
+			return  auth.substring(0, i);
+		} else {
+			return "无";
+		}
+	}
+	public String getBlkStateStr() {
+		for (String str : this.auths) {
+			if (str.equals(GlobalConstraints.Data_ENUM.USER_AUTH_LAB)){
+				return "正常";
+			}
+		}
+		return "黑名单";
+	}
 }
