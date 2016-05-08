@@ -21,9 +21,11 @@ function getRowIndex(target){
 }
 function editrow(target){
 	$('#user-table').datagrid('beginEdit', getRowIndex(target));
+	//在编辑的时候id不可以编辑,修改的时候可以
+	$('.datagrid-editable-input:eq(0)').attr("disabled","disabled");
 }
 function resetPwdRow(target){
-	$.messager.confirm('确认','确定要重置该学生密码为\"123456\"?',function(r){
+	$.messager.confirm('确认','确定要重置该学生的密码为\"123456\"?',function(r){
 		if (r){
 			$('#user-table').datagrid('selectRow', getRowIndex(target));
 			var row = $('#user-table').datagrid('getSelected');

@@ -58,15 +58,11 @@ public class StudentManageController {
 					user = new User();
 					user.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT);
 					user.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
+					user.setLoginName(loginName);
 				}
-				user.setLoginName(loginName);
 				user.setRealName(realName);
 				user.setClzName(clzName);
 				userSvc.save(user);
-				//修改了id将原来的删掉
-				if (!StringUtils.isEmpty(id) && !id.equals(loginName)) {
-					userSvc.deleteById(id);
-				}
 			}
 		} catch (Exception e) {
 			retMap = SysUtils.getDefaultErrorMap();
@@ -91,9 +87,14 @@ public class StudentManageController {
 			retMap.put("e", "班级不能为空!");
 			return false;
 		}
-		if (!StringUtils.isEmpty(id) &&!loginName.equals(id) && userSvc.findById(loginName) != null) {
+		if (StringUtils.isEmpty(id) && userSvc.findById(loginName) != null) {
 			retMap.put("s", false);
 			retMap.put("e", "登录名不能重复!");
+			return false;
+		}
+		if (!StringUtils.isEmpty(id) && !id.equals(loginName)) {
+			retMap.put("s", false);
+			retMap.put("e", "登录名不能修改!");
 			return false;
 		}
 		return true;
