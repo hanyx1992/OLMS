@@ -19,7 +19,7 @@ public class User {
 	/** 真实姓名 */
 	private String realName;
 	/** 角色 0 - Administrator ; 1 - Teacher ; 2 - Student */
-	private short role;
+	private Short role;
 	/** 班级信息 */
 	private String clzName;
 	/** 权限集合 */
@@ -49,6 +49,9 @@ public class User {
 	public String getLoginName() {
 		return loginName;
 	}
+	public String getUserid() {
+		return loginName;
+	}
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
@@ -64,7 +67,7 @@ public class User {
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-	public short getRole() {
+	public Short getRole() {
 		return role;
 	}
 	public void setRole(short role) {
@@ -100,5 +103,8 @@ public class User {
 		} else {
 			return DateUtils.formatDateToILikeymdhmsStr(this.lastLoginDate);
 		}
+	}
+	public String getRoleStr() {
+		return GlobalConstraints.Data_ENUM.USER_ROLE_STRING[this.role];
 	}
 }

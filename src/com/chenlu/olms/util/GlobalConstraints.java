@@ -35,6 +35,7 @@ public final class GlobalConstraints {
 		public static final short USER_ROLE_ADMINISTRATOR = 0;
 		public static final short USER_ROLE_TEACHER = 1;
 		public static final short USER_ROLE_STUDENT = 2;
+		public static final String[] USER_ROLE_STRING = {"管理员", "教师", "学生"};
 
 		public static final String[] USER_AUTHS_ALL = {"main", "laboratory", "review", "notice", "lab-mag", "stu-mag", "tea-mag", "blk-mag"};
 		

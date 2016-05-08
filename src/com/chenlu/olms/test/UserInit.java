@@ -40,7 +40,7 @@ public class UserInit{
 		User a = new User();
 		
 		a.setLoginName("hanyx");
-		a.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
+		a.setLoginPwd(JBcrypt.hashpw("88998899", JBcrypt.gensalt()));
 		a.setRealName("º«ÔªÐñ");
 		a.setClzName("µçÆø10-03°à");
 		a.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT);

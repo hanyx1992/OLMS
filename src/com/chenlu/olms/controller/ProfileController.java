@@ -22,7 +22,7 @@ public class ProfileController {
 	private IOccupySvc occupySvc;
 
 	@RequestMapping(value = "/index.do")
-	public String homenotice(HttpServletRequest request) {
+	public String index(HttpServletRequest request) {
 		User user = SysUtils.getLoginedUser(request);
 		switch (user.getRole()) {
 		case GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT:

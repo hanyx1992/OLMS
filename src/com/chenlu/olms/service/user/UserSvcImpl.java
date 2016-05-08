@@ -5,8 +5,14 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.util.StringUtils;
 
+import com.chenlu.olms.bean.PageBean;
+import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.bean.User;
 import com.chenlu.olms.dao.UserDao;
 import com.chenlu.olms.util.GlobalConstraints;
@@ -38,4 +44,43 @@ public class UserSvcImpl implements IUserSvc{
 		}
 		return user;
 	}
+
+	@Override
+	public PageRetInfo<User> findByCondition(PageBean page, User condition) {
+		Query query = new Query();
+		
+		if (condition.getRole() != null) {
+			query.addCriteria(Criteria.where("role").is(condition.getRole()));
+		}
+		
+		query.with(new Sort(Direction.DESC,"createDate"));
+		PageRetInfo<User> retInfo = new PageRetInfo<User>();
+		retInfo.setTotal(userDao.getPageUsedCount(query));
+		retInfo.setRows(userDao.getPage(query, page));
+		log.debug(retInfo);
+		return retInfo;
+	}
+
+	@Override
+	public User findById(String loginName) {
+		return userDao.queryById(loginName);
+	}
+	
+	@Override
+	public void save(User user) {
+		userDao.save(user);
+	}
+
+	@Override
+	public void deleteById(String loginName) {
+		userDao.logicDeleteById(loginName, "loginName");
+	}
+
+	@Override
+	public void resetPwdById(String id) {
+		User user = userDao.queryById(id);
+		user.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
+		userDao.save(user);
+	}
+
 }

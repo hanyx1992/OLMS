@@ -9,7 +9,7 @@ $('#occupy-table').datagrid({
 	loadMsg:'申请信息加载中请稍后……',
 	columns:[[
 		{field:'id',hidden:true},
-		{field:'labName', title:'实验室名称', width:80, align:'center'},
+		{field:'labName', title:'实验室名称', width:100, align:'center'},
 		{field:'num', title:'申请人数', width:50, align:'center'},
 		{field:'dateStr', title:'预占时间', width:80, align:'center'},
 		{field:'subjectStr', title:'课程', width:80, align:'center'},
