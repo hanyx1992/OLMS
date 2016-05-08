@@ -31,7 +31,8 @@ public class UserSvcImpl implements IUserSvc{
 				user = null;
 			} else {
 				log.info("µÇÂ¼³É¹¦");
-				user.setLastLoginDate(new Date());
+				user.setLastLoginDate(user.getLoginDate());
+				user.setLoginDate(new Date());
 				userDao.save(user);
 			}
 		}

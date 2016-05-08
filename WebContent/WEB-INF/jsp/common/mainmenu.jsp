@@ -28,6 +28,6 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "blk-mag" title = "黑名单管理">黑名单管理</a>
 		</c:if>
 	</c:forEach>
-	<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val =  "info" title = "个人信息">个人信息</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val =  "info" title = "我的">我的</a>
 	<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "exit" title = "退出">退出</a>
 </div>

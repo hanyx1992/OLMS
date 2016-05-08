@@ -40,8 +40,9 @@ public final class GlobalConstraints {
 		
 		public static final short OCCUPY_REVIEW_WAIT = 0;
 		public static final short OCCUPY_REVIEW_SUCCESSS = 1;
-		public static final short OCCUPT_REVIEW_FAILED = -1;
-		
+		public static final short OCCUPY_REVIEW_FAILED = 2;
+		public static final short OCCUPY_REVIEW_CANCEL = 3;
+		public static final String[] OCCUPY_REVIEW_STRING = {"审核中", "已批准", "未通过", "已撤销"};
 		
 	}
 	

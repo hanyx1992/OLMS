@@ -132,10 +132,24 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		return getILikeFormat().format(date);
 	}
 	
+	/**
+	 * 将日期格式化为 yyyy-MM-dd HH:mm:ss
+	 * @param date
+	 * @return
+	 */
+	public static String formatDateToILikeymdhmsStr(Date date) {
+		return getFormat("yyyy-MM-dd HH:mm:ss").format(date);
+	}
+	
 	
 	public static SimpleDateFormat getILikeFormat() {
 		return new SimpleDateFormat("yyyy-MM-dd");
 	}
+	
+	public static SimpleDateFormat getFormat(String pattern) {
+		return new SimpleDateFormat(pattern);
+	}
+	
 	
 	/**
 	 * 求字符串yyyy-MM-dd的日期之后的第几天

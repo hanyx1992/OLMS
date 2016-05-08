@@ -1,5 +1,6 @@
 package com.chenlu.olms.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -157,10 +158,13 @@ public class LaboratoryController {
 			Occupy occupy = new Occupy();
 			occupy.setLoginName(user.getLoginName());
 			occupy.setNo(no);
+			//方便以后显示
+			occupy.setLabName(laboratorySvc.findById(no).getName());
 			occupy.setNum(Integer.parseInt(onum));
 			occupy.setDate(DateUtils.getDateAfterDayNumByDateSting(startDate, Integer.parseInt(day)));
 			occupy.setSubject(Integer.parseInt(num));
 			occupy.setDesc(desc);
+			occupy.setCreateDate(new Date());
 			
 			occupySvc.save(occupy);
 			

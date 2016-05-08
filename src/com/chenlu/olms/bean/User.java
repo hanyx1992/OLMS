@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
 
 /**
@@ -19,15 +20,32 @@ public class User {
 	private String realName;
 	/** 角色 0 - Administrator ; 1 - Teacher ; 2 - Student */
 	private short role;
+	/** 班级信息 */
+	private String clzName;
 	/** 权限集合 */
-	private String[] auths = {"main","laboratory"};
+	private String[] auths = {"main", "laboratory", "info"};
 	/** 创建日期 */
 	private Date createDate;
 	/** 最后登录日期 */
 	private Date lastLoginDate;
+	/** 本次登录日志 */
+	private Date loginDate;
 	/** 数据状态 0 - Del ; 1 - Used */
 	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 	
+	
+	public Date getLoginDate() {
+		return loginDate;
+	}
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
+	}
+	public String getClzName() {
+		return clzName;
+	}
+	public void setClzName(String clzName) {
+		this.clzName = clzName;
+	}
 	public String getLoginName() {
 		return loginName;
 	}
@@ -76,5 +94,11 @@ public class User {
 	public void setAuths(String[] auths) {
 		this.auths = auths;
 	}
-	
+	public String getLastLoginDateStr() {
+		if (this.lastLoginDate == null) {
+			return "第一次登录";
+		} else {
+			return DateUtils.formatDateToILikeymdhmsStr(this.lastLoginDate);
+		}
+	}
 }

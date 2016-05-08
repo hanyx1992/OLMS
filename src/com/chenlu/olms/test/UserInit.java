@@ -42,6 +42,7 @@ public class UserInit{
 		a.setLoginName("hanyx");
 		a.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
 		a.setRealName("韩元旭");
+		a.setClzName("电气10-03班");
 		a.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT);
 		a.setCreateDate(new Date());
 
@@ -53,6 +54,7 @@ public class UserInit{
 		b.setLoginName("admin");
 		b.setLoginPwd(JBcrypt.hashpw("123456", JBcrypt.gensalt()));
 		b.setRealName("管理员");
+		b.setClzName("管理学院");
 		b.setRole(GlobalConstraints.Data_ENUM.USER_ROLE_ADMINISTRATOR);
 		b.setCreateDate(new Date());
 		b.setAuths(GlobalConstraints.Data_ENUM.USER_AUTHS_ALL);

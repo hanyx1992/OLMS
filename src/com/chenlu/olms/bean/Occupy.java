@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
+import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
 
 /**
@@ -17,6 +18,8 @@ public class Occupy {
 	private String id;
 	/** 实验室id和实验室id相匹配 */
 	private String no;
+	/** 实验室名称方便页面显示 */
+	private String labName;
 	/** 预占人的名字 */
 	private String loginName;
 	/** 预占人数 */
@@ -43,6 +46,14 @@ public class Occupy {
 	private short isUsed = GlobalConstraints.Data_ENUM.IS_USED;
 
 	
+	public String getLabName() {
+		return labName;
+	}
+
+	public void setLabName(String labName) {
+		this.labName = labName;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -146,5 +157,62 @@ public class Occupy {
 	public void setReviewDesc(String reviewDesc) {
 		this.reviewDesc = reviewDesc;
 	}
+	
+	public String getDateStr() {
+		if (createDate == date) {
+			return "-";
+		}
+		return DateUtils.formatDateToILikeymdStr(date);
+	}
+	
+	public String getSubjectStr() {
+		String num = "一";
+		switch(subject) {
+		case 1:
+			num = "二";
+			break;
+		case 2:
+			num = "三";
+			break;
+		case 3:
+			num = "四";
+			break;
+		case 4:
+			num = "五";
+			break;
+		case 5:
+			num = "六";
+			break;
+		case 6:
+			num = "七";
+			break;
+		}
+		return "第"+num+"大节";
+	}
+	
+	public String getStateStr() {
+		return GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_STRING[this.reviewState];
+	}
+	
+	public String getCreateDateStr() {
+		if (createDate == null) {
+			return "-";
+		}
+		return DateUtils.formatDateToILikeymdStr(createDate);
+	}
+	
+	public String getReviewDateStr() {
+		if (reviewDate == null) {
+			return "-";
+		}
+		return DateUtils.formatDateToILikeymdStr(reviewDate);
+	}
 
+	public String getCancelBtn() {
+		if (this.reviewState==GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_WAIT) {
+			return "<a href='javascript:;' class='dlt-btn easyui-linkbutton'>撤销</a>";
+		} else {
+			return "-";
+		}
+	}
 }
