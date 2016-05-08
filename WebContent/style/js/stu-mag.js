@@ -54,7 +54,6 @@ function deleterow(target){
 				$.messager.alert('成功', '删除成功!', 'info');
 				$('#user-table').datagrid('reload');
 			})
-//			$('#user-table').datagrid('deleteRow', getRowIndex(target));
 		}
 	});
 }

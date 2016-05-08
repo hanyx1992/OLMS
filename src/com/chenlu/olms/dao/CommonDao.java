@@ -1,5 +1,6 @@
 package com.chenlu.olms.dao;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,17 +89,40 @@ public abstract class CommonDao<T> {
 		Update update = new Update();
 		update.set(GlobalConstraints.Data_ENUM.IS_USED_KEY, GlobalConstraints.Data_ENUM.IS_NOT_USED);
 		
-		this.mongoTemplate.updateMulti(query, update, this.getEntityClass());
+		this.mongoTemplate.updateFirst(query, update, this.getEntityClass());
 	}
+	
+	/**
+	 * 逻辑删除数据,如果这个数据的主键不为默认的_id,比如loginName,
+	 * 那么逻辑删掉了hanyx,实际上创建hanyx是会提示失败的.因为主键冲突了
+	 * 所以我们这里完全删掉旧数据,插入一条新数据,不设置id字段即可
+	 * @param id
+	 * @param key
+	 */
 	public void logicDeleteById(Object id, String key) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where(GlobalConstraints.Data_ENUM.IS_USED_KEY).is(GlobalConstraints.Data_ENUM.IS_USED));
-		query.addCriteria(Criteria.where(key).is(id));
 		
-		Update update = new Update();
-		update.set(GlobalConstraints.Data_ENUM.IS_USED_KEY, GlobalConstraints.Data_ENUM.IS_NOT_USED);
+		T t = this.mongoTemplate.findById(id, this.getEntityClass());
 		
-		this.mongoTemplate.updateMulti(query, update, this.getEntityClass());
+		this.mongoTemplate.remove(new Query(Criteria.where(key).is(id)), this.getEntityClass());
+		
+		try {
+			Field idKey = t.getClass().getDeclaredField(key);
+			idKey.setAccessible(true);
+			idKey.set(t, null);
+			
+			Field isUsedKey = t.getClass().getDeclaredField(GlobalConstraints.Data_ENUM.IS_USED_KEY);
+			isUsedKey.setAccessible(true);
+			isUsedKey.set(t, GlobalConstraints.Data_ENUM.IS_NOT_USED);
+			
+		} catch (NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+		this.mongoTemplate.save(t);
 	}
 
 	public void updateFirst(Query query, Update update) {

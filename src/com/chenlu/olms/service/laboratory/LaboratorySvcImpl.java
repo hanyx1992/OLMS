@@ -41,4 +41,21 @@ public class LaboratorySvcImpl implements ILaboratorySvc{
 	public Laboratory findById(String no) {
 		return laboratoryDao.queryById(no);
 	}
+
+	@Override
+	public void save(Laboratory laboratory) {
+		laboratoryDao.save(laboratory);
+	}
+
+	@Override
+	public void deleteById(String id) {
+		laboratoryDao.logicDeleteById(id, "no");	
+	}
+
+	@Override
+	public void changeState(String id) {
+		Laboratory lab = laboratoryDao.queryById(id);
+		lab.setState((short)(lab.getState()==0?-1:0));
+		laboratoryDao.save(lab);
+	}
 }

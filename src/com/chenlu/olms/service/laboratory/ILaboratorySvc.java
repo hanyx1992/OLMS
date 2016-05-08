@@ -13,4 +13,10 @@ public interface ILaboratorySvc {
 	PageRetInfo<Laboratory> findByCondition(PageBean page, Laboratory condition);
 
 	Laboratory findById(String no);
+
+	void save(Laboratory laboratory);
+
+	void deleteById(String id);
+
+	void changeState(String id);
 }

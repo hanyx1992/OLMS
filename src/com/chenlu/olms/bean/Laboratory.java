@@ -69,5 +69,7 @@ public class Laboratory {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	
+	public String getLabid() {
+		return no;
+	}
 }
