@@ -10,13 +10,13 @@
 <jsp:include page="../common/commonHeader.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" >
-	<div title="学生管理" data-options="closable:true" style="padding: 10px">
-		<table class="easyui-datagrid" title="学生列表" id="user-table"></table>
+	<div title="教师管理" data-options="closable:true" style="padding: 10px">
+		<table class="easyui-datagrid" title="教师管理" id="user-table"></table>
 	</div>
 	<div id="tb" style="height:auto">
-		<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">增加学生</a>
+		<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">增加教师</a>
 	</div>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/stu-mag.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/tea-mag.js"></script>
 </body>
 </html>
 

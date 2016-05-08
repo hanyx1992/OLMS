@@ -16,7 +16,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-shapes',size:'large',iconAlign:'top'" val = "notice" title = "公告管理">公告管理</a>
 		</c:if>
 		<c:if test="${m=='lab-mag'}">
-			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-smartart',size:'large',iconAlign:'top'" val = "lab-mag" title = "教室管理">教室管理</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-smartart',size:'large',iconAlign:'top'" val = "lab-mag" title = "实验室管理">实验室管理</a>
 		</c:if>
 		<c:if test="${m=='stu-mag'}">
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-large-chart',size:'large',iconAlign:'top'" val = "stu-mag" title = "学生管理">学生管理</a>
