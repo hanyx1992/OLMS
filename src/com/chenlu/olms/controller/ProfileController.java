@@ -3,6 +3,7 @@ package com.chenlu.olms.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,9 @@ import com.chenlu.olms.bean.Occupy;
 import com.chenlu.olms.bean.PageBean;
 import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.bean.User;
+import com.chenlu.olms.service.laboratory.ILaboratorySvc;
 import com.chenlu.olms.service.occupy.IOccupySvc;
+import com.chenlu.olms.service.schedule.IScheduleSvc;
 import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.SysUtils;
 
@@ -20,6 +23,12 @@ import com.chenlu.olms.util.SysUtils;
 public class ProfileController {
 	@Autowired
 	private IOccupySvc occupySvc;
+	
+	@Autowired
+	private IScheduleSvc scheduleSvc;
+	
+	@Autowired
+	private ILaboratorySvc laboratorySvc;
 
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
@@ -30,6 +39,14 @@ public class ProfileController {
 			occupySvc.doTimeOut();
 			return "/info/info_stu";
 		case GlobalConstraints.Data_ENUM.USER_ROLE_TEACHER:
+			// ⁄øŒ µ—È “
+			String name = "Œﬁ";
+			if(!StringUtils.isEmpty(user.getClzName())){
+				name =  " : " + laboratorySvc.findById(user.getClzName()).getName();
+				request.setAttribute("hasClass", true);
+				request.setAttribute("num", GlobalConstraints.SYS_PARAM.MAX_SCHEDULE);
+			}
+			request.setAttribute("clzLabName", name);
 			return "/info/info_tea";
 		case GlobalConstraints.Data_ENUM.USER_ROLE_ADMINISTRATOR:
 			return "/info/info_adm";
@@ -54,5 +71,38 @@ public class ProfileController {
 			SysUtils.returnJson(response, SysUtils.getDefaultErrorMap());
 		}
 		
+	}
+	
+	@RequestMapping(value = "/addClz.do")
+	public void add(HttpServletRequest request,  HttpServletResponse response) {
+		try {
+			String no = SysUtils.getLoginedUser(request).getClzName();
+			int day = Integer.parseInt(request.getParameter("day"));
+			int num = Integer.parseInt(request.getParameter("num"));
+			String clzName = request.getParameter("clzName");
+			String desc = request.getParameter("desc");
+			
+			scheduleSvc.addClz(no, day, num, clzName, desc);
+			
+			SysUtils.returnJson(response, SysUtils.getDefaultSuccessMap());
+		} catch (Exception e) {
+			SysUtils.returnJson(response, SysUtils.getDefaultErrorMap());
+		}
+	}
+	
+	
+	@RequestMapping(value = "/delClz.do")
+	public void del(HttpServletRequest request,  HttpServletResponse response) {
+		try {
+			String no = SysUtils.getLoginedUser(request).getClzName();
+			int day = Integer.parseInt(request.getParameter("day"));
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			scheduleSvc.delClz(no, day, num);
+			
+			SysUtils.returnJson(response, SysUtils.getDefaultSuccessMap());
+		} catch (Exception e) {
+			SysUtils.returnJson(response, SysUtils.getDefaultErrorMap());
+		}
 	}
 }

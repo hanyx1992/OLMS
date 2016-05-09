@@ -10,4 +10,10 @@ public interface IScheduleSvc {
 
 
 	Schedule findById(String no);
+
+
+	void addClz(String no, int day, int num, String clzName, String desc);
+
+
+	void delClz(String no, int day, int num);
 }
