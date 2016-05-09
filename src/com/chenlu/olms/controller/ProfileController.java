@@ -26,6 +26,8 @@ public class ProfileController {
 		User user = SysUtils.getLoginedUser(request);
 		switch (user.getRole()) {
 		case GlobalConstraints.Data_ENUM.USER_ROLE_STUDENT:
+			//将过期的申请转换状态.
+			occupySvc.doTimeOut();
 			return "/info/info_stu";
 		case GlobalConstraints.Data_ENUM.USER_ROLE_TEACHER:
 			return "/info/info_tea";

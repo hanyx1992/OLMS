@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
+import com.chenlu.olms.util.SysUtils;
 
 /**
  * 
@@ -215,4 +216,20 @@ public class Occupy {
 			return "-";
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Occupy [id=" + id + ", no=" + no + ", labName=" + labName
+				+ ", loginName=" + loginName + ", num=" + num + ", date="
+				+ date + ", subject=" + subject + ", desc=" + desc
+				+ ", createDate=" + createDate + ", reviewState=" + reviewState
+				+ ", reviewUser=" + reviewUser + ", reviewDate=" + reviewDate
+				+ ", reviewDesc=" + reviewDesc + ", isUsed=" + isUsed + "]";
+	}
+	
+	public String getRealName() {
+		return SysUtils.getUserNameByLoginName(this.loginName);
+	}
+	
+	
 }

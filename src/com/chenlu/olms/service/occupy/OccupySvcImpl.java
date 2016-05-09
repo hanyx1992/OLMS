@@ -68,4 +68,48 @@ public class OccupySvcImpl implements IOccupySvc{
 		}
 		throw new Exception("当前状态不允许撤销");
 	}
+
+	@Override
+	public PageRetInfo<Occupy> findByCondition(PageBean page, Occupy occupy) {
+		Query query = new Query();
+		if (occupy != null && occupy.getReviewState() != -1) {
+			//不是查询全部
+			query.addCriteria(Criteria.where("reviewState").is(occupy.getReviewState()));
+		}
+		query.with(new Sort(Direction.DESC,"createDate"));
+		PageRetInfo<Occupy> retInfo = new PageRetInfo<Occupy>();
+		retInfo.setTotal(occupyDao.getPageUsedCount(query));
+		retInfo.setRows(occupyDao.getPage(query, page));
+		log.debug(retInfo);
+		return retInfo;
+	}
+
+	@Override
+	public void doTimeOut() {
+		log.info("准备清理过期的申请");
+		Query query = new Query();
+		query.addCriteria(Criteria.where("reviewState").is(GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_WAIT));
+		List<Occupy> list = occupyDao.queryAllUsedListByCondition(query);
+		if (list != null && list.size() > 0) {
+			for (Occupy o : list) {
+				if (o.getDate().getTime() <= new Date().getTime()) {
+					o.setReviewState(GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_TIMEOUT);
+					occupyDao.save(o);
+					log.info("处理一条:" + o);
+				}
+			}
+		}
+		log.info("清理完毕...");
+	}
+
+	@Override
+	public void doById(String id, boolean b, String string) throws Exception {
+		Occupy o = occupyDao.queryById(id);
+		if (o.getReviewState() != GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_WAIT) {
+			throw new Exception();
+		}
+		o.setReviewState(b?GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_SUCCESSS:GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_FAILED);
+		o.setReviewDesc(string);
+		occupyDao.save(o);
+	}
 }

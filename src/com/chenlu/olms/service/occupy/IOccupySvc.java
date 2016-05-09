@@ -23,4 +23,10 @@ public interface IOccupySvc {
 	 * @return
 	 */
 	List<Occupy> findAllSuccessAfterToday();
+
+	PageRetInfo<Occupy> findByCondition(PageBean page, Occupy occupy);
+
+	void doTimeOut();
+
+	void doById(String id, boolean b, String string) throws Exception;
 }

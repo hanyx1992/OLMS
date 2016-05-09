@@ -8,8 +8,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.util.StringUtils;
+
 import com.chenlu.olms.bean.PageBean;
 import com.chenlu.olms.bean.User;
+import com.chenlu.olms.service.user.IUserSvc;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -132,5 +135,18 @@ public final class SysUtils {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		retMap.put("success", true);
 		return retMap;
+	}
+	
+	public static String getUserNameByLoginName(String loginName) {
+		IUserSvc userSvc = (IUserSvc) SpringBeanUtil.getBean("userSvc");
+		if (StringUtils.isEmpty(loginName)) {
+			return "-";
+		}
+		User user = userSvc.findById(loginName);
+		if (user != null) {
+			return user.getRealName();
+		} else {
+			return "--";
+		}
 	}
 }
