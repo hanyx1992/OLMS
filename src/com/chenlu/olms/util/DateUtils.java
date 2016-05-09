@@ -215,5 +215,16 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 		}
 		return w;
 	}
+
+	/**
+	 * 判断第一个日期是不是在第二个日期的一周以前
+	 * @param parseDateWithILikeString
+	 * @param date
+	 * @return
+	 */
+	public static boolean isDayBeforeAWeekFormThatDay(
+			Date d, Date o) {
+		return o.getTime() - (getWeekNumByDate(o) * 1000 * 60 * 60 * 24) >= d.getTime();
+	}
 	
 }

@@ -33,5 +33,5 @@ public interface IOccupySvc {
 
 	List<Occupy> getOccupyByWeekFirstDate(Date weekFirstDate);
 
-	List<Occupy> getOccupyByStrDateRange(String startDate, String endDate);
+	List<Occupy> getOccupyByStrDateRange(String no, String startDate, String endDate);
 }

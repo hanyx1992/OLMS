@@ -105,23 +105,39 @@ public class LaboratoryController {
 		String endDate;
 		String isLast = request.getParameter("isLast");
 		Map<String, Object> retMap = SysUtils.getDefaultSuccessMap();
+		retMap.put("lockFlag", false);
+		retMap.put("lockIndex", -1);
 		try {
 			if (StringUtils.isEmpty(startDate)) {
 				startDate = DateUtils.getFirstDayOfThisWeek();
 				endDate = DateUtils.getLastDayOfThisWeek();
 				retMap.put("startDate", startDate);
 				retMap.put("endDate", endDate);
+				retMap.put("lockIndex", DateUtils.getWeekNumByDate(new Date()));
 			} else {
+				
 				startDate = "true".equals(isLast) ? 
 						DateUtils.getLastWeekStrByILike(startDate) :
 							DateUtils.getNextWeekStrByILike(startDate);
 				startDate = DateUtils.getFirstDayOfTheWeek(startDate);
 				endDate = DateUtils.getLastDayOfTheWeek(startDate);
+				
+				if (DateUtils.isDayBeforeAWeekFormThatDay(DateUtils.parseDateWithILikeString(endDate), new Date())) {
+					//如果当期选择的周末为上周末那么不返回结果.直接return;
+					retMap.put("lockFlag", true);
+					SysUtils.returnJson(response, retMap);
+					return ;
+				}
+				
 				retMap.put("startDate", startDate);
 				retMap.put("endDate",  endDate);
+				
+				if (DateUtils.isBetweenTwoDate(new Date(), DateUtils.parseDateWithILikeString(startDate), DateUtils.parseDateWithILikeString(endDate))) {
+					retMap.put("lockIndex", DateUtils.getWeekNumByDate(new Date()));
+				}
 			}
 			
-			List<Occupy> list = occupySvc.getOccupyByStrDateRange(startDate, endDate);
+			List<Occupy> list = occupySvc.getOccupyByStrDateRange(no, startDate, endDate);
 			List<MergeOccupy> occData = handleOccupyListToMergeData(list);
 			retMap.put("list", occData);
 		} catch (Exception e) {

@@ -2,7 +2,8 @@ $.messager.progress({interval:77});
 
 var _day=0;
 var _num=0;
-var _tableData;
+var _tableData = '';
+var _lockIndex = -1
 
 var getStartDate = function() {
 	var text = $("#date-label").html();
@@ -43,29 +44,31 @@ var getDateStr = function(day) {
 }
 
 var lastWeek = function() {
-	reloadTableData();
 	hyx(_rootPath+"/laboratory/getOccupyInfo.do",{no:no, isLast:true, startDate:getStartDate()},function(data){
 		refreshOccupy(data);
 	});
 };
 
 var nextWeek = function() {
-	reloadTableData();
 	hyx(_rootPath+"/laboratory/getOccupyInfo.do",{no:no, isLast:false, startDate:getStartDate()},function(data){
 		refreshOccupy(data);
 	});
 };
 
 var refreshOccupy = function(data) {
-	$("#date-label").html(data.startDate +" ~ " + data.endDate);
-	
-	var list  = data.list;
-	for (var i = 0; i < list.length; i++) {
-		var bean = list[i];
-		if (size > bean.size) {			
-			$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('未满(' + bean.size + '/' + size + ')').attr('nowOccupySize', bean.size);
-		} else {
-			$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('已满');
+	if (!data.lockFlag) {
+		reloadTableData();
+		_lockIndex = data.lockIndex;
+		$("#date-label").html(data.startDate +" ~ " + data.endDate);
+		
+		var list  = data.list;
+		for (var i = 0; i < list.length; i++) {
+			var bean = list[i];
+			if (size > bean.size) {			
+				$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('未满(' + bean.size + '/' + size + ')').attr('nowOccupySize', bean.size);
+			} else {
+				$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('已满');
+			}
 		}
 	}
 };
@@ -83,7 +86,9 @@ var submitOccupy = function() {
 }
 
 var reloadTableData = function() {
-	$('.schedule-table').html(_tableData);
+	if (_tableData.length > 0) {
+		$('.schedule-table').html(_tableData);
+	}
 }
 $(function(){
 	
@@ -92,6 +97,12 @@ $(function(){
 		var nowSize = $(this).attr('nowOccupySize');
 
 		_day = $(this).index() - 1;
+		
+		if (_day < _lockIndex) {
+			$.messager.alert('不可选', '这个时间可不能进行预占哦~', 'info');
+			return false;
+		}
+		
 		_num = $(this).parent('tr').index() - 1;
 		$('#occupy-num-ipt').numberspinner({max: parseInt(size)});
 		

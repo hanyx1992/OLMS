@@ -131,7 +131,7 @@ public class OccupySvcImpl implements IOccupySvc{
 	}
 
 	@Override
-	public List<Occupy> getOccupyByStrDateRange(String startDate, String endDate) {
+	public List<Occupy> getOccupyByStrDateRange(String no, String startDate, String endDate) {
 		Query query = new Query();
 		startDate += " 00:00:00";
 		endDate += " 23:59:59";
@@ -139,6 +139,7 @@ public class OccupySvcImpl implements IOccupySvc{
 		Date s = DateUtils.parseDateWithString(startDate, DateUtils.ILikeYMDHMS);
 		Date e = DateUtils.parseDateWithString(endDate, DateUtils.ILikeYMDHMS);
 		
+		query.addCriteria(Criteria.where("no").is(no));
 		query.addCriteria(Criteria.where("reviewState").is(GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_SUCCESSS));
 		List<Occupy> list = occupyDao.queryAllUsedListByCondition(query);
 		List<Occupy> ret = new ArrayList<Occupy>();
