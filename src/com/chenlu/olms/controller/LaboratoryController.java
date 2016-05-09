@@ -1,7 +1,9 @@
 package com.chenlu.olms.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.chenlu.olms.bean.Laboratory;
+import com.chenlu.olms.bean.MergeOccupy;
 import com.chenlu.olms.bean.Occupy;
 import com.chenlu.olms.bean.PageBean;
 import com.chenlu.olms.bean.PageRetInfo;
@@ -77,6 +80,11 @@ public class LaboratoryController {
 		Map<String, Object> retMap = new HashMap<String, Object>();
 		try {
 			Schedule sche = scheduleSvc.findById(no);
+			if (sche == null) {
+				sche = new Schedule();
+				sche.setNo(no);
+				scheduleSvc.save(sche);
+			}
 			retMap = SysUtils.getDefaultSuccessMap();
 			retMap.put("sche",  sche);
 		} catch (Exception e) {
@@ -94,26 +102,70 @@ public class LaboratoryController {
 		String no = request.getParameter("no");
 		log.info(no);
 		String startDate = request.getParameter("startDate");
+		String endDate;
 		String isLast = request.getParameter("isLast");
 		Map<String, Object> retMap = SysUtils.getDefaultSuccessMap();
 		try {
 			if (StringUtils.isEmpty(startDate)) {
-				retMap.put("startDate", DateUtils.getFirstDayOfThisWeek());
-				retMap.put("endDate", DateUtils.getLastDayOfThisWeek());
+				startDate = DateUtils.getFirstDayOfThisWeek();
+				endDate = DateUtils.getLastDayOfThisWeek();
+				retMap.put("startDate", startDate);
+				retMap.put("endDate", endDate);
 			} else {
 				startDate = "true".equals(isLast) ? 
 						DateUtils.getLastWeekStrByILike(startDate) :
 							DateUtils.getNextWeekStrByILike(startDate);
-				retMap.put("startDate", DateUtils.getFirstDayOfTheWeek(startDate));
-				retMap.put("endDate",  DateUtils.getLastDayOfTheWeek(startDate));
+				startDate = DateUtils.getFirstDayOfTheWeek(startDate);
+				endDate = DateUtils.getLastDayOfTheWeek(startDate);
+				retMap.put("startDate", startDate);
+				retMap.put("endDate",  endDate);
 			}
+			
+			List<Occupy> list = occupySvc.getOccupyByStrDateRange(startDate, endDate);
+			List<MergeOccupy> occData = handleOccupyListToMergeData(list);
+			retMap.put("list", occData);
 		} catch (Exception e) {
 			retMap = SysUtils.getDefaultErrorMap();
+			log.error(e);
 		}
 		
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 将预占单信息合并,以便前台处理数据
+	 * @param list
+	 * @return
+	 */
+	private List<MergeOccupy> handleOccupyListToMergeData(List<Occupy> list) {
+		//分析
+		int[][] sizes = new int[7][GlobalConstraints.SYS_PARAM.MAX_SCHEDULE];
+		if (list != null && list.size() > 0) {
+			for (Occupy o : list) {
+				//求索引,减一
+				int day = DateUtils.getWeekNumByDate(o.getDate()) - 1;
+				int num = o.getSubject();
+				int size = o.getNum();
+				sizes[day][num] = size;
+			}
+		}
+		//处理
+		List<MergeOccupy> retList = new ArrayList<MergeOccupy>();
+		for (int d = 0; d < 7; d++) {
+			for (int n = 0; n < GlobalConstraints.SYS_PARAM.MAX_SCHEDULE; n++) {
+				int size = sizes[d][n];
+				if (size > 0) {
+					MergeOccupy o = new MergeOccupy();
+					o.setDay(d);
+					o.setNum(n);
+					o.setSize(size);
+					retList.add(o);
+				}
+			}
+		}
+		return retList;
+	}
+
 	/**
 	 * 获取实验室一周的串课信息
 	 * @return

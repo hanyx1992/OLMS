@@ -1,5 +1,6 @@
 package com.chenlu.olms.service.occupy;
 
+import java.util.Date;
 import java.util.List;
 
 import com.chenlu.olms.bean.Occupy;
@@ -29,4 +30,8 @@ public interface IOccupySvc {
 	void doTimeOut();
 
 	void doById(String id, boolean b, String string) throws Exception;
+
+	List<Occupy> getOccupyByWeekFirstDate(Date weekFirstDate);
+
+	List<Occupy> getOccupyByStrDateRange(String startDate, String endDate);
 }

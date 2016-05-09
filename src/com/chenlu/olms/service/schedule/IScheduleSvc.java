@@ -16,4 +16,7 @@ public interface IScheduleSvc {
 
 
 	void delClz(String no, int day, int num);
+
+
+	void save(Schedule sche);
 }

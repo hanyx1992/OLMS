@@ -2,6 +2,7 @@ $.messager.progress({interval:77});
 
 var _day=0;
 var _num=0;
+var _tableData;
 
 var getStartDate = function() {
 	var text = $("#date-label").html();
@@ -42,12 +43,14 @@ var getDateStr = function(day) {
 }
 
 var lastWeek = function() {
+	reloadTableData();
 	hyx(_rootPath+"/laboratory/getOccupyInfo.do",{no:no, isLast:true, startDate:getStartDate()},function(data){
 		refreshOccupy(data);
 	});
 };
 
 var nextWeek = function() {
+	reloadTableData();
 	hyx(_rootPath+"/laboratory/getOccupyInfo.do",{no:no, isLast:false, startDate:getStartDate()},function(data){
 		refreshOccupy(data);
 	});
@@ -55,6 +58,16 @@ var nextWeek = function() {
 
 var refreshOccupy = function(data) {
 	$("#date-label").html(data.startDate +" ~ " + data.endDate);
+	
+	var list  = data.list;
+	for (var i = 0; i < list.length; i++) {
+		var bean = list[i];
+		if (size > bean.size) {			
+			$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('未满(' + bean.size + '/' + size + ')').attr('nowOccupySize', bean.size);
+		} else {
+			$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('已满');
+		}
+	}
 };
 
 var cancelOccupy = function() {
@@ -69,13 +82,23 @@ var submitOccupy = function() {
 	});
 }
 
+var reloadTableData = function() {
+	$('.schedule-table').html(_tableData);
+}
 $(function(){
 	
 	//可预约
 	$(document).on('click','.schedule-table tr .a-td[title="可预约"]',function(){
+		var nowSize = $(this).attr('nowOccupySize');
+
 		_day = $(this).index() - 1;
 		_num = $(this).parent('tr').index() - 1;
 		$('#occupy-num-ipt').numberspinner({max: parseInt(size)});
+		
+		if (nowSize != undefined) {
+			var nowSize = parseInt(nowSize);
+			$('#occupy-num-ipt').numberspinner({max: parseInt(size)-nowSize});
+		}
 		
 		$("#date-span").html(getDateStr(_day) + " " + $(".schedule-table tr:eq(0) td").eq(_day+1).html() + " " + $(".schedule-table tr").eq(_num+1).children("td:eq(0)").html());
 		
@@ -98,11 +121,12 @@ $(function(){
 				}
 			}
 		}
+		_tableData = $('.schedule-table').html();
 	});
 	
 	//加载预占信息
 	var loadOccupy = hyx(_rootPath+"/laboratory/getOccupyInfo.do",{no:no},function(data){
-
+		refreshOccupy(data);
 	});
 	
 	$.when(loadSche,loadOccupy).then(function(){

@@ -10,6 +10,11 @@ var addTab = function(title, url) {
 		});
 	}
 }
+var closetab = function(title) {
+	if ($('#mainTabs').tabs('exists', title)){
+		$('#mainTabs').tabs('close', title);
+	}
+}
 
 var hyx = function(url,data,func, errfunc) {
 	return 	$.post(url,data,function(data){

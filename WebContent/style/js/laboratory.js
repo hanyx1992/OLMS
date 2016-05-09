@@ -9,6 +9,7 @@ $('#lab-table').datagrid({
 	loadMsg:'实验室信息加载中请稍后……',
 	toolbar:"#tb",
 	onClickRow:  function(index, rowData) {
+		parent.closetab("实验室详情");
 		parent.addTab("实验室详情", _rootPath + "/laboratory/desc.do?no="+rowData.no);
 	},
 	columns:[[

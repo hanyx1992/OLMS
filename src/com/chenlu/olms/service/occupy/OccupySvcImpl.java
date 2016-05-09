@@ -1,5 +1,6 @@
 package com.chenlu.olms.service.occupy;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import com.chenlu.olms.bean.Occupy;
 import com.chenlu.olms.bean.PageBean;
 import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.dao.OccupyDao;
+import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
 
 public class OccupySvcImpl implements IOccupySvc{
@@ -111,5 +113,43 @@ public class OccupySvcImpl implements IOccupySvc{
 		o.setReviewState(b?GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_SUCCESSS:GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_FAILED);
 		o.setReviewDesc(string);
 		occupyDao.save(o);
+	}
+
+	@Override
+	public List<Occupy> getOccupyByWeekFirstDate(Date weekFirstDate) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("reviewState").is(GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_SUCCESSS));
+		List<Occupy> list = occupyDao.queryAllUsedListByCondition(query);
+		if (list != null && list.size() > 0) {
+			for (Occupy o : list) {
+				//TODO
+				Date date = o.getDate();
+				DateUtils.isBetweenTwoDate(date, weekFirstDate, null);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Occupy> getOccupyByStrDateRange(String startDate, String endDate) {
+		Query query = new Query();
+		startDate += " 00:00:00";
+		endDate += " 23:59:59";
+		
+		Date s = DateUtils.parseDateWithString(startDate, DateUtils.ILikeYMDHMS);
+		Date e = DateUtils.parseDateWithString(endDate, DateUtils.ILikeYMDHMS);
+		
+		query.addCriteria(Criteria.where("reviewState").is(GlobalConstraints.Data_ENUM.OCCUPY_REVIEW_SUCCESSS));
+		List<Occupy> list = occupyDao.queryAllUsedListByCondition(query);
+		List<Occupy> ret = new ArrayList<Occupy>();
+		
+		if (list != null && list.size() > 0) {
+			for (Occupy o : list) {
+				if (DateUtils.isBetweenTwoDate(o.getDate(), s, e)) {
+					ret.add(o);
+				}
+			}
+		}
+		return ret;
 	}
 }

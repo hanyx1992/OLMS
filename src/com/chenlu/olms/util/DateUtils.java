@@ -7,6 +7,8 @@ import java.util.Date;
 
 public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	
+	public static final String ILikeYMDHMS = "yyyy-MM-dd HH:mm:ss";
+
 	private DateUtils() {}
 	
 	/**
@@ -82,9 +84,13 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	}
 	
 	public static Date parseDateWithILikeString(String str) {
+		return parseDateWithString(str, "yyyy-MM-dd");
+	}
+	
+	public static Date parseDateWithString(String date, String str) {
 		Date now;
 		try {
-			now = new SimpleDateFormat("yyyy-MM-dd").parse(str);
+			now = new SimpleDateFormat(str).parse(date);
 		} catch (ParseException e) {
 			now = new Date();
 		}
@@ -138,7 +144,7 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	 * @return
 	 */
 	public static String formatDateToILikeymdhmsStr(Date date) {
-		return getFormat("yyyy-MM-dd HH:mm:ss").format(date);
+		return getFormat(ILikeYMDHMS).format(date);
 	}
 	
 	
@@ -193,4 +199,21 @@ public final class DateUtils extends org.apache.commons.lang.time.DateUtils{
 	public static boolean isNowBetweenTwoDate(Date start, Date end) {
 		return isBetweenTwoDate(new Date(), start, end);
 	}
+
+	/**
+	 * 返回星期几 1-星期一  7-星期日
+	 * @param date
+	 * @return
+	 */
+	public static int getWeekNumByDate(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		// 第一天为周一
+		if (w <= 0) {
+			w = 7;
+		}
+		return w;
+	}
+	
 }

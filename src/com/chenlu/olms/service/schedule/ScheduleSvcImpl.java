@@ -61,4 +61,9 @@ public class ScheduleSvcImpl implements IScheduleSvc{
 		
 		scheduleDao.save(s);
 	}
+
+	@Override
+	public void save(Schedule sche) {
+		scheduleDao.save(sche);
+	}
 }
