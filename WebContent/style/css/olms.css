@@ -55,3 +55,34 @@ body {
 .schedule-table tr .a-td:hover{
 	cursor:pointer;
 }
+
+.icon-main{
+	background:url('../img/icon/main.png') no-repeat center center;
+}
+.icon-lab{
+	background:url('../img/icon/laboratory.png') no-repeat center center;
+}
+.icon-review{
+	background:url('../img/icon/review.png') no-repeat center center;
+}
+.icon-notice{
+	background:url('../img/icon/notice.png') no-repeat center center;
+}
+.icon-lab-mag{
+	background:url('../img/icon/lab-mag.png') no-repeat center center;
+}
+.icon-stu-mag{
+	background:url('../img/icon/stu-mag.png') no-repeat center center;
+}
+.icon-tea-mag{
+	background:url('../img/icon/tea-mag.png') no-repeat center center;
+}
+.icon-blk-mag{
+	background:url('../img/icon/blk-mag.png') no-repeat center center;
+}
+.icon-info{
+	background:url('../img/icon/info.png') no-repeat center center;
+}
+.icon-exit{
+	background:url('../img/icon/exit.png') no-repeat center center;
+}
