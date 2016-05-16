@@ -17,4 +17,6 @@ public interface IUserSvc {
 	void deleteById(String loginName);
 
 	void resetPwdById(String id);
+
+	void changepwd(User user, String oldPwd, String newPwd) throws Exception;
 }

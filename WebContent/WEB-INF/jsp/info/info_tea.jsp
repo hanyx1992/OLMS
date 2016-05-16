@@ -35,7 +35,10 @@
 					</tr>
 					<tr>
 						<td>描述:</td>
-						<td style="text-align:left" colspan="4">无</td>
+						<td>无</td>
+						<td> </td>
+						<td>操作:</td>
+						<td><a href="javascript:;" class="easyui-linkbutton" onClick="alertChangePwd();">点击修改密码</a></td>
 					</tr>
 				</table>
 			</form>
@@ -161,6 +164,33 @@
 					<td>
 						<a href="javascript:;" class="easyui-linkbutton" onClick="submitAdd();">提交</a>
 						<a href="javascript:;" class="easyui-linkbutton" onClick="cancelAdd();">取消</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="password-window" class="easyui-window" title="修改密码" 
+			data-options="closed:true, iconCls:'icon-save', minimizable:false, maximizable:false,
+			resizable:false" 
+			style="width:280px;height:230px;padding:10px;">
+			<table>
+				<tr>
+					<td>旧的密码:</td>
+					<td><input id = "old-pwd-ipt"  class="easyui-textbox" type="password" data-options="" value="" style="width:150px;height:28px"></td>
+				</tr>
+				<tr>
+					<td>新的密码:</td>
+					<td><input id = "new-pwd-ipt"  class="easyui-textbox" type="password" data-options="" value="" style="width:150px;height:28px"></td>
+				</tr>
+				<tr>
+					<td>再次输入:</td>
+					<td><input id = "con-pwd-ipt"  class="easyui-textbox" type="password" data-options="" value="" style="width:150px;height:28px"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<a href="javascript:;" class="easyui-linkbutton" onClick="submitPwd();">提交</a>
+						<a href="javascript:;" class="easyui-linkbutton" onClick="cancelPwd();">取消</a>
 					</td>
 				</tr>
 			</table>

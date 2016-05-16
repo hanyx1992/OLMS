@@ -22,6 +22,33 @@ $('#occupy-table').datagrid({
 	]]
 });
 
+var alertChangePwd = function() {
+	$('#password-window').window('open');
+}
+
+var cancelPwd = function() {
+	$('#password-window').window('close');
+};
+
+var submitPwd = function() {
+	$('#password-window').window('close');
+	
+	var oldPwd = $("#old-pwd-ipt").val();
+	var newPwd = $("#new-pwd-ipt").val();
+	var conPwd = $("#con-pwd-ipt").val();
+	
+	if (newPwd != conPwd) {
+		$('#password-window').window('open');
+		$.messager.alert('发生错误啦!', '两次密码输入不一致!', 'error');
+		return false;
+	}
+	
+	hyx(_rootPath + "/info/pwd.do", {oldPwd:oldPwd, newPwd : newPwd},
+			function(data){
+				$.messager.alert('成功', '修改密码成功!', 'info');
+	});
+}
+
 $(function(){
 	$('#occupy-table').datagrid('getPager').pagination({
 		beforePageText: '第',

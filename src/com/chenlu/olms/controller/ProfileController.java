@@ -1,5 +1,7 @@
 package com.chenlu.olms.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +17,7 @@ import com.chenlu.olms.bean.User;
 import com.chenlu.olms.service.laboratory.ILaboratorySvc;
 import com.chenlu.olms.service.occupy.IOccupySvc;
 import com.chenlu.olms.service.schedule.IScheduleSvc;
+import com.chenlu.olms.service.user.IUserSvc;
 import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.SysUtils;
 
@@ -29,7 +32,10 @@ public class ProfileController {
 	
 	@Autowired
 	private ILaboratorySvc laboratorySvc;
-
+	
+	@Autowired
+	private IUserSvc userSvc;
+	
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		User user = SysUtils.getLoginedUser(request);
@@ -52,6 +58,21 @@ public class ProfileController {
 			return "/info/info_adm";
 		}
 		return null;
+	}
+	
+	@RequestMapping(value = "/pwd.do")
+	public void changePwd(HttpServletRequest request,  HttpServletResponse response) {
+		String oldPwd = request.getParameter("oldPwd");
+		String newPwd = request.getParameter("newPwd");
+		User user = SysUtils.getLoginedUser(request);
+		try {
+			userSvc.changepwd(user, oldPwd, newPwd);
+			SysUtils.returnJson(response, SysUtils.getDefaultSuccessMap());
+		} catch (Exception e) {
+			Map<String, Object> map = SysUtils.getDefaultErrorMap();
+			map.put("errMsg", e.getMessage());
+			SysUtils.returnJson(response, map);
+		}
 	}
 	
 	@RequestMapping(value = "/stuFind.do")

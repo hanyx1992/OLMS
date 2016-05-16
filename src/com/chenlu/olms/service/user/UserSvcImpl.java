@@ -83,4 +83,21 @@ public class UserSvcImpl implements IUserSvc{
 		userDao.save(user);
 	}
 
+	@Override
+	public void changepwd(User user, String oldPwd, String newPwd) throws Exception {
+		if (StringUtils.isEmpty(oldPwd) || StringUtils.isEmpty(newPwd)) {
+			throw new Exception("√‹¬Î≤ªƒ‹Œ™ø’!");
+		}
+		user = userDao.queryById(user.getLoginName());
+		if (user != null) {
+			if (!JBcrypt.checkpw(oldPwd, user.getLoginPwd()) ||
+					user.getIsUsed() != GlobalConstraints.Data_ENUM.IS_USED) {
+				throw new Exception("æ…√‹¬Î¥ÌŒÛ!");
+			} else {
+				user.setLoginPwd(JBcrypt.hashpw(newPwd, JBcrypt.gensalt()));
+				userDao.save(user);
+			}
+		}
+	}
+
 }
