@@ -11,7 +11,7 @@
 <jsp:include page="commonHeader.jsp"></jsp:include>
 </head>
 <body class="easyui-layout" >
-	<div class="easyui-layout" style="width: auto; height: 800px;">
+	<div class="easyui-layout" style="width: auto; height: 100%;overflow-y: scroll;">
 		<div data-options="region:'north'" style="height: 57px; background: #f2f2f2; padding: 1px">
 			<img alt="Open Laboratory Management System By Chen Lu" src="<%=request.getContextPath()%>/style/img/logo.jpg">
 		</div>
