@@ -18,8 +18,6 @@
 			</c:if>
 			<div class="easyui-panel" title="${notice.title} [${notice.createDateStr} ~ ${notice.expDateStr}]" style="width:100%">
 				<div style="text-align:center;padding:15px;word-break:break-all; width:85%; overflow:auto;">${notice.content}</div>
-					</tr>
-				</table>
 			</div>
 		</c:forEach>
 	</div>
