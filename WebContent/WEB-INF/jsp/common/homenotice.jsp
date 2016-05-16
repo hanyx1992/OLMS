@@ -16,8 +16,14 @@
 			<c:if test="${i.index>0}">
 				<div class="heigth-div-15"></div>
 			</c:if>
-			<div class="easyui-panel" title="${notice.title} [${notice.createDateStr} ~ ${notice.expDateStr}]" style="width:100%">
-				<div style="text-align:center;padding:15px;word-break:break-all; width:85%; overflow:auto;">${notice.content}</div>
+			<div class="easyui-panel" title="${notice.title}" style="width:100%">
+				<div style="text-align:center;padding:15px;word-break:break-all; width:85%; overflow:auto;">
+					<p>${notice.content}</p>
+					<br/>
+					<p style="text-align:right;">发布人 : ${notice.userName}</p>
+					<p style="text-align:right;">发布时间 : ${notice.createDateStr}</p>
+					<p style="text-align:right;">过期时间 : ${notice.expDateStr}</p>
+				</div>
 			</div>
 		</c:forEach>
 	</div>

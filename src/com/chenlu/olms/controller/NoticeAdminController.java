@@ -51,10 +51,11 @@ public class NoticeAdminController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String exp = request.getParameter("exp");
-
+		String userName = SysUtils.getLoginedUser(request).getLoginName();
+		
 		Map<String, Object> retMap;
 		try {
-			noticeSvc.addNotice(title, content, new Date(Long.parseLong(exp)));
+			noticeSvc.addNotice(title, content, userName,new Date(Long.parseLong(exp)));
 			retMap = SysUtils.getDefaultSuccessMap();
 		} catch (Exception e) {
 			retMap = SysUtils.getDefaultErrorMap();

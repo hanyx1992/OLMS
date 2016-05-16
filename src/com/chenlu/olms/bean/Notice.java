@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 
 import com.chenlu.olms.util.DateUtils;
 import com.chenlu.olms.util.GlobalConstraints;
+import com.chenlu.olms.util.SysUtils;
 
 public class Notice {
 	
@@ -17,6 +18,8 @@ public class Notice {
 	private String content;
 	/** 创建日期 */
 	private Date createDate;
+	/** 创建人 */
+	private String createUser;
 	/** 失效日期 */
 	private Date expDate;
 	/** 数据状态 0 - Del ; 1 - Used */
@@ -66,4 +69,14 @@ public class Notice {
 	public String getDeletebtn() {
 		return "<a href='javascript:;' class='dlt-btn easyui-linkbutton'>删除</a>";
 	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+	public String getUserName() {
+		return SysUtils.getUserNameByLoginName(createUser);
+	}
+	
 }

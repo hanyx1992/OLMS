@@ -46,12 +46,13 @@ public class NoticeSvcImpl implements INoticeSvc{
 	}
 
 	@Override
-	public void addNotice(String title, String content, Date expDate) {
+	public void addNotice(String title, String content, String userName, Date expDate) {
 		Notice n = new Notice();
 		n.setTitle(title);
 		n.setContent(content);
 		n.setCreateDate(new Date());
 		n.setExpDate(expDate);
+		n.setCreateUser(userName);
 		noticeDao.save(n);
 	}
 
