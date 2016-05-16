@@ -205,7 +205,22 @@ public class LaboratoryController {
 	public void findAll(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
 		
-		PageRetInfo<Laboratory> retInfo = laboratorySvc.findByCondition(page, null);
+		String no = request.getParameter("no");
+		String name = request.getParameter("name");
+		String location = request.getParameter("location");
+		
+		Laboratory condition = new Laboratory();
+		if (!StringUtils.isEmpty(no)) {
+			condition.setNo(no);
+		}
+		if (!StringUtils.isEmpty(name)) {
+			condition.setName(name);
+		}
+		if (!StringUtils.isEmpty(location)) {
+			condition.setLocation(location);
+		}
+		
+		PageRetInfo<Laboratory> retInfo = laboratorySvc.findByCondition(page, condition);
 		SysUtils.returnJson(response, retInfo);
 	}
 	

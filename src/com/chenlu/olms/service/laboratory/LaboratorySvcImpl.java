@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.chenlu.olms.bean.Laboratory;
@@ -28,7 +29,16 @@ public class LaboratorySvcImpl implements ILaboratorySvc{
 	@Override
 	public PageRetInfo<Laboratory> findByCondition(PageBean page, Laboratory condition) {
 		Query query = new Query();
-		//--Condition 略 想到的时候在写吧
+		if (condition.getNo()!=null) {
+			query.addCriteria(Criteria.where("no").regex(condition.getNo()));
+		}
+		if (condition.getName()!=null) {
+			query.addCriteria(Criteria.where("name").regex(condition.getName()));
+		}
+		if (condition.getLocation()!=null) {
+			query.addCriteria(Criteria.where("location").regex(condition.getLocation()));
+		}
+				
 		query.with(new Sort(Direction.ASC,"no"));
 		PageRetInfo<Laboratory> retInfo = new PageRetInfo<Laboratory>();
 		retInfo.setTotal(laboratoryDao.getPageUsedCount(query));

@@ -13,7 +13,6 @@ $('#lab-table').datagrid({
 		parent.addTab("实验室详情", _rootPath + "/laboratory/desc.do?no="+rowData.no);
 	},
 	columns:[[
-//		{field:'content',hidden:true},
 		{field:'no', title:'编号', width:100, sortable:"true", align:'center'},
 		{field:'name', title:'名称', width:150, sortable:"true", align:'center'},
 		{field:'size', title:'容纳人数', width:80, sortable:"true", align:'center'},
@@ -25,6 +24,11 @@ $('#lab-table').datagrid({
 
 
 var doSearch = function() {
+	$('#lab-table').datagrid('load',{
+		no: $("#no").val(),
+		name: $("#name").val(),
+		location: $("#location").val()
+	});
 }
 
 $(function(){
