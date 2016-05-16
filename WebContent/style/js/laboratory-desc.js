@@ -67,7 +67,7 @@ var refreshOccupy = function(data) {
 			if (size > bean.size) {			
 				$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('未满(' + bean.size + '/' + size + ')').attr('nowOccupySize', bean.size);
 			} else {
-				$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('已满');
+				$('.schedule-table tr').eq(bean.num+1).children('td').eq(bean.day+1).html('已满').attr('nowOccupySize', bean.size);
 			}
 		}
 	}
@@ -105,6 +105,11 @@ $(function(){
 		
 		_num = $(this).parent('tr').index() - 1;
 		$('#occupy-num-ipt').numberspinner({max: parseInt(size)});
+		
+		if (parseInt(nowSize) >= parseInt(size)) {
+			$.messager.alert('不可选', '已经满了哦~', 'info');
+			return false;
+		}
 		
 		if (nowSize != undefined) {
 			var nowSize = parseInt(nowSize);
