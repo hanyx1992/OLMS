@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.util.StringUtils;
 
 import com.chenlu.olms.bean.Notice;
 import com.chenlu.olms.bean.PageBean;
@@ -46,7 +47,13 @@ public class NoticeSvcImpl implements INoticeSvc{
 	}
 
 	@Override
-	public void addNotice(String title, String content, String userName, Date expDate) {
+	public void addNotice(String title, String content, String userName, Date expDate) throws Exception {
+		if (StringUtils.isEmpty(title)) {
+			throw new Exception("公告标题不能为空!");
+		}
+		if (StringUtils.isEmpty(content)) {
+			throw new Exception("公告内容不能为空!");
+		}
 		Notice n = new Notice();
 		n.setTitle(title);
 		n.setContent(content);

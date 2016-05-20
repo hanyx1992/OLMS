@@ -57,8 +57,12 @@ public class NoticeAdminController {
 		try {
 			noticeSvc.addNotice(title, content, userName,new Date(Long.parseLong(exp)));
 			retMap = SysUtils.getDefaultSuccessMap();
+		} catch (NumberFormatException e) {
+			retMap = SysUtils.getDefaultErrorMap();
+			retMap.put("errMsg", "失效时间不可以为空!");
 		} catch (Exception e) {
 			retMap = SysUtils.getDefaultErrorMap();
+			retMap.put("errMsg", e.getMessage());
 		}
 		SysUtils.returnJson(response, retMap);
 	}

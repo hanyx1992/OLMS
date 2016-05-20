@@ -17,7 +17,7 @@ public interface INoticeSvc {
 	
 	PageRetInfo<Notice> findByCondition(PageBean page, Notice condition);
 	
-	void addNotice(String title, String content, String userName, Date expDate);
+	void addNotice(String title, String content, String userName, Date expDate) throws Exception;
 
 	void deleteById(String id);
 }
