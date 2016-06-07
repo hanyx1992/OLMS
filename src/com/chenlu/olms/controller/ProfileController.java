@@ -21,6 +21,9 @@ import com.chenlu.olms.service.user.IUserSvc;
 import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 我的
+ */
 @Controller
 @RequestMapping("/info")
 public class ProfileController {
@@ -36,6 +39,11 @@ public class ProfileController {
 	@Autowired
 	private IUserSvc userSvc;
 	
+	/**
+	 * 载入页面要显示的信息
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		User user = SysUtils.getLoginedUser(request);
@@ -75,6 +83,11 @@ public class ProfileController {
 		}
 	}
 	
+	/**
+	 * 订单查询
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/stuFind.do")
 	public void findStudentOccupyRecords(HttpServletRequest request,  HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -82,6 +95,11 @@ public class ProfileController {
 		SysUtils.returnJson(response, retInfo);
 	}
 	
+	/**
+	 * 取消预占
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/cancelOccupy.do")
 	public void cancelOccupy(HttpServletRequest request,  HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -94,6 +112,11 @@ public class ProfileController {
 		
 	}
 	
+	/**
+	 * 增加课程
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/addClz.do")
 	public void add(HttpServletRequest request,  HttpServletResponse response) {
 		try {
@@ -111,7 +134,11 @@ public class ProfileController {
 		}
 	}
 	
-	
+	/**
+	 * 删除学生
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/delClz.do")
 	public void del(HttpServletRequest request,  HttpServletResponse response) {
 		try {

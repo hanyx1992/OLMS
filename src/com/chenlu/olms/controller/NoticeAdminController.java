@@ -16,6 +16,9 @@ import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.service.notice.INoticeSvc;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 公告相关控制器
+ */
 @Controller
 @RequestMapping("/notice")
 public class NoticeAdminController {
@@ -29,7 +32,7 @@ public class NoticeAdminController {
 	}
 	
 	/**
-	 * 查询所有实验室信息
+	 * 查询所有公告信息
 	 * @param request
 	 * @param response
 	 */
@@ -67,6 +70,11 @@ public class NoticeAdminController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 删除公告
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/delNotice.do")
 	public void delNotice(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");

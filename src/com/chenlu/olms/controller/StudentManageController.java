@@ -18,17 +18,30 @@ import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.JBcrypt;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 学生管理
+ */
 @Controller
 @RequestMapping("/stu-mag")
 public class StudentManageController {
 	@Autowired
 	private IUserSvc userSvc;
 	
+	/**
+	 * 管理页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		return "stu-mag/stu-mag";
 	}
 	
+	/**
+	 * 查询所有学生
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/find.do")
 	public void find(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -37,6 +50,12 @@ public class StudentManageController {
 		PageRetInfo<User> retInfo = userSvc.findByCondition(page, condition);
 		SysUtils.returnJson(response, retInfo);
 	}
+	
+	/**
+	 * 增加学生
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/add.do")
 	public void add(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -100,6 +119,11 @@ public class StudentManageController {
 		return true;
 	}
 	
+	/**
+	 * 删除学生
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/del.do")
 	public void del(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -113,6 +137,11 @@ public class StudentManageController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 重置密码
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/reset.do")
 	public void resetPwd(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");

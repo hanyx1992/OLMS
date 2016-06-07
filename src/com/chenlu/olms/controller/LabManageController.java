@@ -18,6 +18,9 @@ import com.chenlu.olms.bean.PageRetInfo;
 import com.chenlu.olms.service.laboratory.ILaboratorySvc;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 实验室管理的控制器
+ */
 @Controller
 @RequestMapping("/lab-mag")
 public class LabManageController {
@@ -26,11 +29,21 @@ public class LabManageController {
 	
 	private static Log log = LogFactory.getLog(LabManageController.class);
 	
+	/**
+	 * 管理页面
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		return "lab-mag/lab-mag";
 	}
 	
+	/**
+	 * 查询所有实验室
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/find.do")
 	public void find(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -38,6 +51,12 @@ public class LabManageController {
 		PageRetInfo<Laboratory> retInfo = laboratorySvc.findByCondition(page, condition);
 		SysUtils.returnJson(response, retInfo);
 	}
+	
+	/**
+	 * 增加实验室
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/add.do")
 	public void add(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -110,6 +129,11 @@ public class LabManageController {
 		return true;
 	}
 	
+	/**
+	 * 删除实验室
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/del.do")
 	public void del(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -124,6 +148,11 @@ public class LabManageController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 关闭或者开放实验室
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/reset.do")
 	public void resetPwd(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");

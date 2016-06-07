@@ -16,12 +16,20 @@ import com.chenlu.olms.service.occupy.IOccupySvc;
 import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 租用审核相关控制器
+ */
 @Controller
 @RequestMapping("/review")
 public class ReviewController {
 	@Autowired
 	private IOccupySvc occupySvc;
 
+	/**
+	 * 页面跳转
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		//将过期的申请转换状态.
@@ -29,6 +37,11 @@ public class ReviewController {
 		return "/review/review";
 	}
 	
+	/**
+	 * 查询所有带审核的订单
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/findReview.do")
 	public void findReview(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -38,6 +51,11 @@ public class ReviewController {
 		SysUtils.returnJson(response, retInfo);
 	}
 	
+	/**
+	 * 查询所有订单
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/findOccupy.do")
 	public void findOccupy(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -46,6 +64,11 @@ public class ReviewController {
 		SysUtils.returnJson(response, retInfo);
 	}
 	
+	/**
+	 * 审核通过
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/ok.do")
 	public void ok(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -59,6 +82,11 @@ public class ReviewController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 审核不通过
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/no.do")
 	public void no(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");

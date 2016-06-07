@@ -21,17 +21,30 @@ import com.chenlu.olms.service.user.IUserSvc;
 import com.chenlu.olms.util.GlobalConstraints;
 import com.chenlu.olms.util.SysUtils;
 
+/**
+ * 权限管理控制器
+ */
 @Controller
 @RequestMapping("/auth-mag")
 public class AuthManageController {
 	@Autowired
 	private IUserSvc userSvc;
 
+	/**
+	 * 页面跳转
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/index.do")
 	public String index(HttpServletRequest request) {
 		return "/auth-mag/auth-mag";
 	}
 	
+	/**
+	 * 查询所有用户
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/find.do")
 	public void find(HttpServletRequest request, HttpServletResponse response) {
 		PageBean page = SysUtils.getPageInfo(request);
@@ -39,6 +52,11 @@ public class AuthManageController {
 		SysUtils.returnJson(response, retInfo);
 	}
 	
+	/**
+	 * 获取用户权限
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/getAuth.do")
 	public void getAuth(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> retMap;
@@ -60,6 +78,11 @@ public class AuthManageController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 设置用户权限
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/setAuth.do")
 	public void setAuth(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> retMap;
@@ -95,6 +118,11 @@ public class AuthManageController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 拉黑处理
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/blk.do")
 	public void blk(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> retMap;
@@ -114,6 +142,11 @@ public class AuthManageController {
 		SysUtils.returnJson(response, retMap);
 	}
 	
+	/**
+	 * 黑名单移除
+	 * @param request
+	 * @param response
+	 */
 	@RequestMapping(value = "/cancelblk.do")
 	public void cancelblk(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> retMap;
