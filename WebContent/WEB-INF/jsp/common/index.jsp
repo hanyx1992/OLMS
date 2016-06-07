@@ -10,14 +10,21 @@
 <title>Open Laboratory Management System</title>
 <jsp:include page="commonHeader.jsp"></jsp:include>
 </head>
-<body class="easyui-layout" >
-	<div class="easyui-layout" style="width: auto; height: 100%;overflow-y: scroll;">
-		<div data-options="region:'north'" style="height: 57px; background: #f2f2f2; padding: 1px">
-			<img alt="Open Laboratory Management System By Chen Lu" src="<%=request.getContextPath()%>/style/img/logo.jpg">
-		</div>
-		<jsp:include page="mainmenu.jsp"></jsp:include>
-		<div id = "mainTabs" class="easyui-tabs" data-options="region:'center',tools:'#tab-tools'" style="width: 100%"></div>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/common/index.js"></script>
+<body>
+<div>
+	<div style="height: 100%; background: #f2f2f2; padding: 1px;">
+		<img alt="Open Laboratory Management System By Chen Lu" src="<%=request.getContextPath()%>/style/img/logo.jpg">
 	</div>
+  <div  style="float:right;margin:0 0 0 -110px; width:100%;">
+    <div  style="margin:0 0 0 110px; background:#f2f2f2; border:1px solid #dddddd;">
+		<div id = "mainTabs" class="easyui-tabs" data-options="tools:'#tab-tools',height:'670px'" style="width: 100%;"></div>
+    </div>
+  </div>
+  <div  style="float:left;width:100px;border:1px solid #dddddd;">
+		<jsp:include page="mainmenu.jsp"></jsp:include>
+  </div>
+</div>
+
 </body>
+<script type="text/javascript" src="<%=request.getContextPath()%>/style/js/common/index.js"></script>
 </html>

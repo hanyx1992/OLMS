@@ -47,6 +47,10 @@
 </div>
 
 <script>
+	if(self.frameElement.tagName=="IFRAME"){
+		window.parent.location.href = '<%=request.getContextPath()%>';
+	}
+
 	function submitForm() {
 		hyx(_rootPath+"/verify.do", {username: $("input[name='username']").val(), password: $("input[name='password']").val(),
 			message: $("input[name='message']").val()}, function() {

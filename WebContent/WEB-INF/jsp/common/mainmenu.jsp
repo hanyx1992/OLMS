@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div id = "mainMenu" data-options="region:'west'" title="菜单" style="width: 100px; padding: 5px;">
+<div id = "mainMenu" title="菜单" style="width: 88px; padding: 5px;">
 	<c:forEach items="${auths}" var="m">
 		<c:if test="${m eq 'main'}">
 			<a href="javascript:void(0)" class="easyui-linkbutton" style="width: 100%" data-options="iconCls:'icon-main',size:'large',iconAlign:'top'" val = "main" title = "首页">首页</a>
